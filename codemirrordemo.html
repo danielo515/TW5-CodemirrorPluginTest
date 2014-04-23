@@ -145,6 +145,8 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js</li>
 
+<li>$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js</li>
+
 <li>$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js</li>
 
 <li>$:/plugins/tiddlywiki/codemirror/addon/fold/brace-fold.js</li>
@@ -165,11 +167,21 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/codemirror/keymap/vim.js</li>
 
+<li>$:/plugins/tiddlywiki/codemirror/mode/css.js</li>
+
+<li>$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js</li>
+
 <li>$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js</li>
 
 <li>$:/plugins/tiddlywiki/codemirror/mode/javascript.js</li>
 
+<li>$:/plugins/tiddlywiki/codemirror/mode/php.js</li>
+
 <li>$:/plugins/tiddlywiki/codemirror/mode/vbscript.js</li>
+
+<li>$:/plugins/tiddlywiki/codemirror/mode/xml.js</li>
+
+<li>$:/plugins/tiddlywiki/codemirror/theme/blackboard.css</li>
 
 <li>$:/plugins/tiddlywiki/codemirror/theme/default</li>
 
@@ -181,7 +193,11 @@ Error message and password prompt
 
 <li>$:/SiteTitle</li>
 
+<li>$:/state/modeDropdown-{-274957950}</li>
+
 <li>$:/state/sidebar</li>
+
+<li>$:/state/tab-{-1021635034}</li>
 
 <li>$:/state/tab-{-1370058198}</li>
 
@@ -223,6 +239,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>codemirrorStyles</li>
+
 <li>DynamicEditor</li>
 
 <li>DynamicEditorWithInput</li>
@@ -230,6 +248,8 @@ Error message and password prompt
 <li>EditOthers</li>
 
 <li>EditOthers 1</li>
+
+<li>EditOthersButtons</li>
 
 <li>HelloThere</li>
 
@@ -271,7 +291,7 @@ Error message and password prompt
 <pre>mode: javascript
 theme: erlang-dark</pre>
 </div>
-<div created="20140422224836133" modified="20140423015803681" title="$:/config/CodeMirror/javascript" type="application/json">
+<div created="20140422224836133" modified="20140423191321249" title="$:/config/CodeMirror/javascript" type="application/json">
 <pre>{
   &quot;require&quot;: [
       &quot;$:/plugins/tiddlywiki/codemirror/addon/dialog.js&quot;,
@@ -280,13 +300,18 @@ theme: erlang-dark</pre>
       &quot;$:/plugins/tiddlywiki/codemirror/keymap/emacs.js&quot;,
       &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;,
       &quot;$:/plugins/tiddlywiki/codemirror/mode/javascript.js&quot;,
-      &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;, &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/comment-fold.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/mode/css.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/mode/php.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;,
+      &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/comment-fold.js&quot;,
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js&quot;,
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/brace-fold.js&quot;,
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.js&quot;,
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/foldcode.js&quot;,
       &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;,
-      &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js&quot;,
       &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js&quot;
   ],
   &quot;configuration&quot;: {
@@ -296,6 +321,7 @@ theme: erlang-dark</pre>
       &quot;indentUnit&quot;:4,
       &quot;lineWrapping&quot;:false,
       &quot;autoCloseBrackets&quot; : true,
+       &quot;autoCloseTags&quot; : true,
       &quot;foldGutter&quot;: true,
       &quot;matchBrackets&quot;:true,
       &quot;gutters&quot;: [&quot;CodeMirror-linenumbers&quot;, &quot;CodeMirror-foldgutter&quot;]
@@ -3611,7 +3637,7 @@ theme: erlang-dark</pre>
     }
 }</pre>
 </div>
-<div created="20140422224253998" modified="20140423161841921" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
+<div created="20140422224253998" modified="20140423162418767" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
 <pre>/*\
 title: $:/core/modules/widgets/edit-text-codemirror.js
 type: application/javascript
@@ -3679,7 +3705,7 @@ EditTextWidget.prototype.getDynamicConfig = function(){
         for (conf in configs) { EditTextWidget.configuration[conf] = configs[conf]; }
     }
     
-   /* EditTextWidget.configuration[&quot;mode&quot;]=this.codemirrorMode;*/
+    EditTextWidget.configuration[&quot;mode&quot;]=this.codemirrorMode;
     EditTextWidget.configuration[&quot;theme&quot;]=this.theme;
     
 };
@@ -3723,11 +3749,11 @@ EditTextWidget.prototype.updateEditor = function(text) {
 })();
 </pre>
 </div>
-<div created="20140422205754376" modified="20140422205812835" title="$:/DefaultTiddlers">
-<pre>[[HelloThere]]
+<div created="20140422205754376" modified="20140423184741802" title="$:/DefaultTiddlers">
+<pre>[[$:/config/CodeMirror/javascript]]
 [list[$:/StoryList]]</pre>
 </div>
-<div current-tiddler="$:/core/modules/widgets/edit-text-codemirror.js" modified="20140423161841923" title="$:/HistoryList" type="application/json">
+<div current-tiddler="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js" modified="20140423191349752" title="$:/HistoryList" type="application/json">
 <pre>[
     {
         &quot;title&quot;: &quot;Draft of 'New Tiddler'&quot;
@@ -5952,6 +5978,777 @@ EditTextWidget.prototype.updateEditor = function(text) {
     },
     {
         &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'HelloThere'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;HelloThere&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'HelloThere'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;HelloThere&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'HelloThere'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;HelloThere&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/javascript.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 522.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 319,
+            &quot;right&quot;: 404,
+            &quot;bottom&quot;: 538.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/javascript.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/javascript.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 251.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 308,
+            &quot;right&quot;: 393,
+            &quot;bottom&quot;: 267.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 284,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 79,
+            &quot;right&quot;: 856,
+            &quot;bottom&quot;: 300,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'codemirrorStyles'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;codemirrorStyles&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthersButtons'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 433.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 323,
+            &quot;right&quot;: 408,
+            &quot;bottom&quot;: 449.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 209.390625,
+            &quot;left&quot;: 125,
+            &quot;width&quot;: 132,
+            &quot;right&quot;: 257,
+            &quot;bottom&quot;: 225.390625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 331.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 283,
+            &quot;bottom&quot;: 347.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/javascript.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 398.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 319,
+            &quot;right&quot;: 404,
+            &quot;bottom&quot;: 414.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/javascript.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;css.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 209,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 226,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'css.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 308,
+            &quot;right&quot;: 393,
+            &quot;bottom&quot;: 205.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/css.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js'&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 304,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 367,
+            &quot;right&quot;: 1144,
+            &quot;bottom&quot;: 320,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 324,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 893,
+            &quot;bottom&quot;: 340,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/codemirror.css&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 245.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 324,
+            &quot;right&quot;: 409,
+            &quot;bottom&quot;: 262.890625,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/codemirror.css 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/doc/docs.css&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 305,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 108.780029296875,
+            &quot;right&quot;: 885.780029296875,
+            &quot;bottom&quot;: 323,
+            &quot;height&quot;: 18
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/css.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/css.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/doc/docs.css'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;New Tiddler 3&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 324,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 88,
+            &quot;right&quot;: 865,
+            &quot;bottom&quot;: 340,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 344,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 79,
+            &quot;right&quot;: 856,
+            &quot;bottom&quot;: 360,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 344,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 79,
+            &quot;right&quot;: 856,
+            &quot;bottom&quot;: 360,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 344,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 79,
+            &quot;right&quot;: 856,
+            &quot;bottom&quot;: 360,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 192,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 208,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/css.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 448.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 280,
+            &quot;right&quot;: 365,
+            &quot;bottom&quot;: 464.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/css.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/css.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 356,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 372,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 331.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 308,
+            &quot;right&quot;: 393,
+            &quot;bottom&quot;: 347.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/vbscript.js 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/vbscript.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/php.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 563,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 579,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 425,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 441,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 352.390625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 353,
+            &quot;right&quot;: 438,
+            &quot;bottom&quot;: 368.390625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/ControlPanel&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 144,
+            &quot;left&quot;: 806.328125,
+            &quot;width&quot;: 36.328125,
+            &quot;right&quot;: 842.65625,
+            &quot;bottom&quot;: 171,
+            &quot;height&quot;: 27
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/mode/xml.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 494,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 510,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;blackboard.css&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'blackboard.css'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'blackboard.css'&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 264,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 155,
+            &quot;right&quot;: 937,
+            &quot;bottom&quot;: 280,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/theme/blackboard.css&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 333,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 349,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 371.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 379,
+            &quot;right&quot;: 464,
+            &quot;bottom&quot;: 387.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.html&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 517,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 533,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.html'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 379,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 395,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 517,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 533,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 379,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 395,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 517,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 533,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 264,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 344,
+            &quot;right&quot;: 1126,
+            &quot;bottom&quot;: 280,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;
     }
 ]</pre>
 </div>
@@ -6105,6 +6902,98 @@ EditTextWidget.prototype.updateEditor = function(text) {
         cm.indentLine(cur.line + 2, null, true);
       });
     };
+  }
+})();
+</pre>
+</div>
+<div created="20140423190443012" modified="20140423191349749" module-type="library" title="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js" type="application/javascript">
+<pre>/**
+ * Tag-closer extension for CodeMirror.
+ *
+ * This extension adds an &quot;autoCloseTags&quot; option that can be set to
+ * either true to get the default behavior, or an object to further
+ * configure its behavior.
+ *
+ * These are supported options:
+ *
+ * `whenClosing` (default true)
+ *   Whether to autoclose when the '/' of a closing tag is typed.
+ * `whenOpening` (default true)
+ *   Whether to autoclose the tag when the final '&gt;' of an opening
+ *   tag is typed.
+ * `dontCloseTags` (default is empty tags for HTML, none for XML)
+ *   An array of tag names that should not be autoclosed.
+ * `indentTags` (default is block tags for HTML, none for XML)
+ *   An array of tag names that should, when opened, cause a
+ *   blank line to be added inside the tag, and the blank line and
+ *   closing line to be indented.
+ *
+ * See demos/closetag.html for a usage example.
+ */
+
+(function() {
+  CodeMirror.defineOption(&quot;autoCloseTags&quot;, false, function(cm, val, old) {
+    if (old != CodeMirror.Init &amp;&amp; old)
+      cm.removeKeyMap(&quot;autoCloseTags&quot;);
+    if (!val) return;
+    var map = {name: &quot;autoCloseTags&quot;};
+    if (typeof val != &quot;object&quot; || val.whenClosing)
+      map[&quot;'/'&quot;] = function(cm) { return autoCloseSlash(cm); };
+    if (typeof val != &quot;object&quot; || val.whenOpening)
+      map[&quot;'&gt;'&quot;] = function(cm) { return autoCloseGT(cm); };
+    cm.addKeyMap(map);
+  });
+
+  var htmlDontClose = [&quot;area&quot;, &quot;base&quot;, &quot;br&quot;, &quot;col&quot;, &quot;command&quot;, &quot;embed&quot;, &quot;hr&quot;, &quot;img&quot;, &quot;input&quot;, &quot;keygen&quot;, &quot;link&quot;, &quot;meta&quot;, &quot;param&quot;,
+                       &quot;source&quot;, &quot;track&quot;, &quot;wbr&quot;,&quot;edit&quot;,&quot;edit-text&quot;];
+  var htmlIndent = [&quot;applet&quot;, &quot;blockquote&quot;, &quot;body&quot;, &quot;button&quot;, &quot;div&quot;, &quot;dl&quot;, &quot;fieldset&quot;, &quot;form&quot;, &quot;frameset&quot;, &quot;h1&quot;, &quot;h2&quot;, &quot;h3&quot;, &quot;h4&quot;,
+                    &quot;h5&quot;, &quot;h6&quot;, &quot;head&quot;, &quot;html&quot;, &quot;iframe&quot;, &quot;layer&quot;, &quot;legend&quot;, &quot;object&quot;, &quot;ol&quot;, &quot;p&quot;, &quot;select&quot;, &quot;table&quot;, &quot;ul&quot;];
+
+  function autoCloseGT(cm) {
+    var pos = cm.getCursor(), tok = cm.getTokenAt(pos);
+    var inner = CodeMirror.innerMode(cm.getMode(), tok.state), state = inner.state;
+    if (inner.mode.name != &quot;xml&quot; || !state.tagName) return CodeMirror.Pass;
+
+    var opt = cm.getOption(&quot;autoCloseTags&quot;), html = inner.mode.configuration == &quot;html&quot;;
+    var dontCloseTags = (typeof opt == &quot;object&quot; &amp;&amp; opt.dontCloseTags) || (html &amp;&amp; htmlDontClose);
+    var indentTags = (typeof opt == &quot;object&quot; &amp;&amp; opt.indentTags) || (html &amp;&amp; htmlIndent);
+
+    var tagName = state.tagName;
+    if (tok.end &gt; pos.ch) tagName = tagName.slice(0, tagName.length - tok.end + pos.ch);
+    var lowerTagName = tagName.toLowerCase();
+    // Don't process the '&gt;' at the end of an end-tag or self-closing tag
+    if (tok.type == &quot;string&quot; &amp;&amp; (tok.end != pos.ch || !/[\&quot;\']/.test(tok.string.charAt(tok.string.length - 1)) || tok.string.length == 1) ||
+        tok.type == &quot;tag&quot; &amp;&amp; state.type == &quot;closeTag&quot; ||
+        tok.string.indexOf(&quot;/&quot;) == (tok.string.length - 1) || // match something like &lt;someTagName /&gt;
+        dontCloseTags &amp;&amp; indexOf(dontCloseTags, lowerTagName) &gt; -1)
+      return CodeMirror.Pass;
+
+    var doIndent = indentTags &amp;&amp; indexOf(indentTags, lowerTagName) &gt; -1;
+    var curPos = doIndent ? CodeMirror.Pos(pos.line + 1, 0) : CodeMirror.Pos(pos.line, pos.ch + 1);
+    cm.replaceSelection(&quot;&gt;&quot; + (doIndent ? &quot;\n\n&quot; : &quot;&quot;) + &quot;&lt;/&quot; + tagName + &quot;&gt;&quot;,
+                        {head: curPos, anchor: curPos});
+    if (doIndent) {
+      cm.indentLine(pos.line + 1);
+      cm.indentLine(pos.line + 2);
+    }
+  }
+
+  function autoCloseSlash(cm) {
+    var pos = cm.getCursor(), tok = cm.getTokenAt(pos);
+    var inner = CodeMirror.innerMode(cm.getMode(), tok.state), state = inner.state;
+    if (tok.type == &quot;string&quot; || tok.string.charAt(0) != &quot;&lt;&quot; ||
+        tok.start != pos.ch - 1 || inner.mode.name != &quot;xml&quot;)
+      return CodeMirror.Pass;
+
+    var tagName = state.context &amp;&amp; state.context.tagName;
+    if (tagName) cm.replaceSelection(&quot;/&quot; + tagName + &quot;&gt;&quot;, &quot;end&quot;);
+  }
+
+  function indexOf(collection, elt) {
+    if (collection.indexOf) return collection.indexOf(elt);
+    for (var i = 0, e = collection.length; i &lt; e; ++i)
+      if (collection[i] == elt) return i;
+    return -1;
   }
 })();
 </pre>
@@ -10518,7 +11407,725 @@ For example:
 )();
 </pre>
 </div>
-<div created="20140422234111495" description="Mixed Html" modified="20140423002156268" module-type="library" name="htmlmixed" title="$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js" type="application/javascript">
+<div created="20140423174614148" description="CSS " modified="20140423175942223" module-type="library" name="text/css" title="$:/plugins/tiddlywiki/codemirror/mode/css.js" type="application/javascript">
+<pre>CodeMirror.defineMode(&quot;css&quot;, function(config, parserConfig) {
+  &quot;use strict&quot;;
+
+  if (!parserConfig.propertyKeywords) parserConfig = CodeMirror.resolveMode(&quot;text/css&quot;);
+
+  var indentUnit = config.indentUnit || config.tabSize || 2,
+      hooks = parserConfig.hooks || {},
+      atMediaTypes = parserConfig.atMediaTypes || {},
+      atMediaFeatures = parserConfig.atMediaFeatures || {},
+      propertyKeywords = parserConfig.propertyKeywords || {},
+      colorKeywords = parserConfig.colorKeywords || {},
+      valueKeywords = parserConfig.valueKeywords || {},
+      allowNested = !!parserConfig.allowNested,
+      type = null;
+
+  function ret(style, tp) { type = tp; return style; }
+
+  function tokenBase(stream, state) {
+    var ch = stream.next();
+    if (hooks[ch]) {
+      // result[0] is style and result[1] is type
+      var result = hooks[ch](stream, state);
+      if (result !== false) return result;
+    }
+    if (ch == &quot;@&quot;) {stream.eatWhile(/[\w\\\-]/); return ret(&quot;def&quot;, stream.current());}
+    else if (ch == &quot;=&quot;) ret(null, &quot;compare&quot;);
+    else if ((ch == &quot;~&quot; || ch == &quot;|&quot;) &amp;&amp; stream.eat(&quot;=&quot;)) return ret(null, &quot;compare&quot;);
+    else if (ch == &quot;\&quot;&quot; || ch == &quot;'&quot;) {
+      state.tokenize = tokenString(ch);
+      return state.tokenize(stream, state);
+    }
+    else if (ch == &quot;#&quot;) {
+      stream.eatWhile(/[\w\\\-]/);
+      return ret(&quot;atom&quot;, &quot;hash&quot;);
+    }
+    else if (ch == &quot;!&quot;) {
+      stream.match(/^\s*\w*/);
+      return ret(&quot;keyword&quot;, &quot;important&quot;);
+    }
+    else if (/\d/.test(ch) || ch == &quot;.&quot; &amp;&amp; stream.eat(/\d/)) {
+      stream.eatWhile(/[\w.%]/);
+      return ret(&quot;number&quot;, &quot;unit&quot;);
+    }
+    else if (ch === &quot;-&quot;) {
+      if (/\d/.test(stream.peek())) {
+        stream.eatWhile(/[\w.%]/);
+        return ret(&quot;number&quot;, &quot;unit&quot;);
+      } else if (stream.match(/^[^-]+-/)) {
+        return ret(&quot;meta&quot;, &quot;meta&quot;);
+      }
+    }
+    else if (/[,+&gt;*\/]/.test(ch)) {
+      return ret(null, &quot;select-op&quot;);
+    }
+    else if (ch == &quot;.&quot; &amp;&amp; stream.match(/^-?[_a-z][_a-z0-9-]*/i)) {
+      return ret(&quot;qualifier&quot;, &quot;qualifier&quot;);
+    }
+    else if (ch == &quot;:&quot;) {
+      return ret(&quot;operator&quot;, ch);
+    }
+    else if (/[;{}\[\]\(\)]/.test(ch)) {
+      return ret(null, ch);
+    }
+    else if (ch == &quot;u&quot; &amp;&amp; stream.match(&quot;rl(&quot;)) {
+      stream.backUp(1);
+      state.tokenize = tokenParenthesized;
+      return ret(&quot;property&quot;, &quot;variable&quot;);
+    }
+    else {
+      stream.eatWhile(/[\w\\\-]/);
+      return ret(&quot;property&quot;, &quot;variable&quot;);
+    }
+  }
+
+  function tokenString(quote, nonInclusive) {
+    return function(stream, state) {
+      var escaped = false, ch;
+      while ((ch = stream.next()) != null) {
+        if (ch == quote &amp;&amp; !escaped)
+          break;
+        escaped = !escaped &amp;&amp; ch == &quot;\\&quot;;
+      }
+      if (!escaped) {
+        if (nonInclusive) stream.backUp(1);
+        state.tokenize = tokenBase;
+      }
+      return ret(&quot;string&quot;, &quot;string&quot;);
+    };
+  }
+
+  function tokenParenthesized(stream, state) {
+    stream.next(); // Must be '('
+    if (!stream.match(/\s*[\&quot;\']/, false))
+      state.tokenize = tokenString(&quot;)&quot;, true);
+    else
+      state.tokenize = tokenBase;
+    return ret(null, &quot;(&quot;);
+  }
+
+  return {
+    startState: function(base) {
+      return {tokenize: tokenBase,
+              baseIndent: base || 0,
+              stack: [],
+              lastToken: null};
+    },
+
+    token: function(stream, state) {
+
+      // Use these terms when applicable (see http://www.xanthir.com/blog/b4E50)
+      //
+      // rule** or **ruleset:
+      // A selector + braces combo, or an at-rule.
+      //
+      // declaration block:
+      // A sequence of declarations.
+      //
+      // declaration:
+      // A property + colon + value combo.
+      //
+      // property value:
+      // The entire value of a property.
+      //
+      // component value:
+      // A single piece of a property value. Like the 5px in
+      // text-shadow: 0 0 5px blue;. Can also refer to things that are
+      // multiple terms, like the 1-4 terms that make up the background-size
+      // portion of the background shorthand.
+      //
+      // term:
+      // The basic unit of author-facing CSS, like a single number (5),
+      // dimension (5px), string (&quot;foo&quot;), or function. Officially defined
+      //  by the CSS 2.1 grammar (look for the 'term' production)
+      //
+      //
+      // simple selector:
+      // A single atomic selector, like a type selector, an attr selector, a
+      // class selector, etc.
+      //
+      // compound selector:
+      // One or more simple selectors without a combinator. div.example is
+      // compound, div &gt; .example is not.
+      //
+      // complex selector:
+      // One or more compound selectors chained with combinators.
+      //
+      // combinator:
+      // The parts of selectors that express relationships. There are four
+      // currently - the space (descendant combinator), the greater-than
+      // bracket (child combinator), the plus sign (next sibling combinator),
+      // and the tilda (following sibling combinator).
+      //
+      // sequence of selectors:
+      // One or more of the named type of selector chained with commas.
+
+      state.tokenize = state.tokenize || tokenBase;
+      if (state.tokenize == tokenBase &amp;&amp; stream.eatSpace()) return null;
+      var style = state.tokenize(stream, state);
+      if (style &amp;&amp; typeof style != &quot;string&quot;) style = ret(style[0], style[1]);
+
+      // Changing style returned based on context
+      var context = state.stack[state.stack.length-1];
+      if (style == &quot;variable&quot;) {
+        if (type == &quot;variable-definition&quot;) state.stack.push(&quot;propertyValue&quot;);
+        return state.lastToken = &quot;variable-2&quot;;
+      } else if (style == &quot;property&quot;) {
+        var word = stream.current().toLowerCase();
+        if (context == &quot;propertyValue&quot;) {
+          if (valueKeywords.hasOwnProperty(word)) {
+            style = &quot;string-2&quot;;
+          } else if (colorKeywords.hasOwnProperty(word)) {
+            style = &quot;keyword&quot;;
+          } else {
+            style = &quot;variable-2&quot;;
+          }
+        } else if (context == &quot;rule&quot;) {
+          if (!propertyKeywords.hasOwnProperty(word)) {
+            style += &quot; error&quot;;
+          }
+        } else if (context == &quot;block&quot;) {
+          // if a value is present in both property, value, or color, the order
+          // of preference is property -&gt; color -&gt; value
+          if (propertyKeywords.hasOwnProperty(word)) {
+            style = &quot;property&quot;;
+          } else if (colorKeywords.hasOwnProperty(word)) {
+            style = &quot;keyword&quot;;
+          } else if (valueKeywords.hasOwnProperty(word)) {
+            style = &quot;string-2&quot;;
+          } else {
+            style = &quot;tag&quot;;
+          }
+        } else if (!context || context == &quot;@media{&quot;) {
+          style = &quot;tag&quot;;
+        } else if (context == &quot;@media&quot;) {
+          if (atMediaTypes[stream.current()]) {
+            style = &quot;attribute&quot;; // Known attribute
+          } else if (/^(only|not)$/.test(word)) {
+            style = &quot;keyword&quot;;
+          } else if (word == &quot;and&quot;) {
+            style = &quot;error&quot;; // &quot;and&quot; is only allowed in @mediaType
+          } else if (atMediaFeatures.hasOwnProperty(word)) {
+            style = &quot;error&quot;; // Known property, should be in @mediaType(
+          } else {
+            // Unknown, expecting keyword or attribute, assuming attribute
+            style = &quot;attribute error&quot;;
+          }
+        } else if (context == &quot;@mediaType&quot;) {
+          if (atMediaTypes.hasOwnProperty(word)) {
+            style = &quot;attribute&quot;;
+          } else if (word == &quot;and&quot;) {
+            style = &quot;operator&quot;;
+          } else if (/^(only|not)$/.test(word)) {
+            style = &quot;error&quot;; // Only allowed in @media
+          } else {
+            // Unknown attribute or property, but expecting property (preceded
+            // by &quot;and&quot;). Should be in parentheses
+            style = &quot;error&quot;;
+          }
+        } else if (context == &quot;@mediaType(&quot;) {
+          if (propertyKeywords.hasOwnProperty(word)) {
+            // do nothing, remains &quot;property&quot;
+          } else if (atMediaTypes.hasOwnProperty(word)) {
+            style = &quot;error&quot;; // Known property, should be in parentheses
+          } else if (word == &quot;and&quot;) {
+            style = &quot;operator&quot;;
+          } else if (/^(only|not)$/.test(word)) {
+            style = &quot;error&quot;; // Only allowed in @media
+          } else {
+            style += &quot; error&quot;;
+          }
+        } else if (context == &quot;@import&quot;) {
+          style = &quot;tag&quot;;
+        } else {
+          style = &quot;error&quot;;
+        }
+      } else if (style == &quot;atom&quot;) {
+        if(!context || context == &quot;@media{&quot; || context == &quot;block&quot;) {
+          style = &quot;builtin&quot;;
+        } else if (context == &quot;propertyValue&quot;) {
+          if (!/^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(stream.current())) {
+            style += &quot; error&quot;;
+          }
+        } else {
+          style = &quot;error&quot;;
+        }
+      } else if (context == &quot;@media&quot; &amp;&amp; type == &quot;{&quot;) {
+        style = &quot;error&quot;;
+      }
+
+      // Push/pop context stack
+      if (type == &quot;{&quot;) {
+        if (context == &quot;@media&quot; || context == &quot;@mediaType&quot;) {
+          state.stack[state.stack.length-1] = &quot;@media{&quot;;
+        }
+        else {
+          var newContext = allowNested ? &quot;block&quot; : &quot;rule&quot;;
+          state.stack.push(newContext);
+        }
+      }
+      else if (type == &quot;}&quot;) {
+        if (context == &quot;interpolation&quot;) style = &quot;operator&quot;;
+        // Pop off end of array until { is reached
+        while(state.stack.length){
+          var removed = state.stack.pop();
+          if(removed.indexOf(&quot;{&quot;) &gt; -1 || removed == &quot;block&quot; || removed == &quot;rule&quot;){
+            break;
+          }
+        }
+      }
+      else if (type == &quot;interpolation&quot;) state.stack.push(&quot;interpolation&quot;);
+      else if (type == &quot;@media&quot;) state.stack.push(&quot;@media&quot;);
+      else if (type == &quot;@import&quot;) state.stack.push(&quot;@import&quot;);
+      else if (context == &quot;@media&quot; &amp;&amp; /\b(keyword|attribute)\b/.test(style))
+        state.stack[state.stack.length-1] = &quot;@mediaType&quot;;
+      else if (context == &quot;@mediaType&quot; &amp;&amp; stream.current() == &quot;,&quot;)
+        state.stack[state.stack.length-1] = &quot;@media&quot;;
+      else if (type == &quot;(&quot;) {
+        if (context == &quot;@media&quot; || context == &quot;@mediaType&quot;) {
+          // Make sure @mediaType is used to avoid error on {
+          state.stack[state.stack.length-1] = &quot;@mediaType&quot;;
+          state.stack.push(&quot;@mediaType(&quot;);
+        }
+        else state.stack.push(&quot;(&quot;);
+      }
+      else if (type == &quot;)&quot;) {
+        // Pop off end of array until ( is reached
+        while(state.stack.length){
+          var removed = state.stack.pop();
+          if(removed.indexOf(&quot;(&quot;) &gt; -1){
+            break;
+          }
+        }
+      }
+      else if (type == &quot;:&quot; &amp;&amp; state.lastToken == &quot;property&quot;) state.stack.push(&quot;propertyValue&quot;);
+      else if (context == &quot;propertyValue&quot; &amp;&amp; type == &quot;;&quot;) state.stack.pop();
+      else if (context == &quot;@import&quot; &amp;&amp; type == &quot;;&quot;) state.stack.pop();
+
+      return state.lastToken = style;
+    },
+
+    indent: function(state, textAfter) {
+      var n = state.stack.length;
+      if (/^\}/.test(textAfter))
+        n -= state.stack[n-1] == &quot;propertyValue&quot; ? 2 : 1;
+      return state.baseIndent + n * indentUnit;
+    },
+
+    electricChars: &quot;}&quot;,
+    blockCommentStart: &quot;/*&quot;,
+    blockCommentEnd: &quot;*/&quot;,
+    fold: &quot;brace&quot;
+  };
+});
+
+(function() {
+  function keySet(array) {
+    var keys = {};
+    for (var i = 0; i &lt; array.length; ++i) {
+      keys[array[i]] = true;
+    }
+    return keys;
+  }
+
+  var atMediaTypes = keySet([
+    &quot;all&quot;, &quot;aural&quot;, &quot;braille&quot;, &quot;handheld&quot;, &quot;print&quot;, &quot;projection&quot;, &quot;screen&quot;,
+    &quot;tty&quot;, &quot;tv&quot;, &quot;embossed&quot;
+  ]);
+
+  var atMediaFeatures = keySet([
+    &quot;width&quot;, &quot;min-width&quot;, &quot;max-width&quot;, &quot;height&quot;, &quot;min-height&quot;, &quot;max-height&quot;,
+    &quot;device-width&quot;, &quot;min-device-width&quot;, &quot;max-device-width&quot;, &quot;device-height&quot;,
+    &quot;min-device-height&quot;, &quot;max-device-height&quot;, &quot;aspect-ratio&quot;,
+    &quot;min-aspect-ratio&quot;, &quot;max-aspect-ratio&quot;, &quot;device-aspect-ratio&quot;,
+    &quot;min-device-aspect-ratio&quot;, &quot;max-device-aspect-ratio&quot;, &quot;color&quot;, &quot;min-color&quot;,
+    &quot;max-color&quot;, &quot;color-index&quot;, &quot;min-color-index&quot;, &quot;max-color-index&quot;,
+    &quot;monochrome&quot;, &quot;min-monochrome&quot;, &quot;max-monochrome&quot;, &quot;resolution&quot;,
+    &quot;min-resolution&quot;, &quot;max-resolution&quot;, &quot;scan&quot;, &quot;grid&quot;
+  ]);
+
+  var propertyKeywords = keySet([
+    &quot;align-content&quot;, &quot;align-items&quot;, &quot;align-self&quot;, &quot;alignment-adjust&quot;,
+    &quot;alignment-baseline&quot;, &quot;anchor-point&quot;, &quot;animation&quot;, &quot;animation-delay&quot;,
+    &quot;animation-direction&quot;, &quot;animation-duration&quot;, &quot;animation-iteration-count&quot;,
+    &quot;animation-name&quot;, &quot;animation-play-state&quot;, &quot;animation-timing-function&quot;,
+    &quot;appearance&quot;, &quot;azimuth&quot;, &quot;backface-visibility&quot;, &quot;background&quot;,
+    &quot;background-attachment&quot;, &quot;background-clip&quot;, &quot;background-color&quot;,
+    &quot;background-image&quot;, &quot;background-origin&quot;, &quot;background-position&quot;,
+    &quot;background-repeat&quot;, &quot;background-size&quot;, &quot;baseline-shift&quot;, &quot;binding&quot;,
+    &quot;bleed&quot;, &quot;bookmark-label&quot;, &quot;bookmark-level&quot;, &quot;bookmark-state&quot;,
+    &quot;bookmark-target&quot;, &quot;border&quot;, &quot;border-bottom&quot;, &quot;border-bottom-color&quot;,
+    &quot;border-bottom-left-radius&quot;, &quot;border-bottom-right-radius&quot;,
+    &quot;border-bottom-style&quot;, &quot;border-bottom-width&quot;, &quot;border-collapse&quot;,
+    &quot;border-color&quot;, &quot;border-image&quot;, &quot;border-image-outset&quot;,
+    &quot;border-image-repeat&quot;, &quot;border-image-slice&quot;, &quot;border-image-source&quot;,
+    &quot;border-image-width&quot;, &quot;border-left&quot;, &quot;border-left-color&quot;,
+    &quot;border-left-style&quot;, &quot;border-left-width&quot;, &quot;border-radius&quot;, &quot;border-right&quot;,
+    &quot;border-right-color&quot;, &quot;border-right-style&quot;, &quot;border-right-width&quot;,
+    &quot;border-spacing&quot;, &quot;border-style&quot;, &quot;border-top&quot;, &quot;border-top-color&quot;,
+    &quot;border-top-left-radius&quot;, &quot;border-top-right-radius&quot;, &quot;border-top-style&quot;,
+    &quot;border-top-width&quot;, &quot;border-width&quot;, &quot;bottom&quot;, &quot;box-decoration-break&quot;,
+    &quot;box-shadow&quot;, &quot;box-sizing&quot;, &quot;break-after&quot;, &quot;break-before&quot;, &quot;break-inside&quot;,
+    &quot;caption-side&quot;, &quot;clear&quot;, &quot;clip&quot;, &quot;color&quot;, &quot;color-profile&quot;, &quot;column-count&quot;,
+    &quot;column-fill&quot;, &quot;column-gap&quot;, &quot;column-rule&quot;, &quot;column-rule-color&quot;,
+    &quot;column-rule-style&quot;, &quot;column-rule-width&quot;, &quot;column-span&quot;, &quot;column-width&quot;,
+    &quot;columns&quot;, &quot;content&quot;, &quot;counter-increment&quot;, &quot;counter-reset&quot;, &quot;crop&quot;, &quot;cue&quot;,
+    &quot;cue-after&quot;, &quot;cue-before&quot;, &quot;cursor&quot;, &quot;direction&quot;, &quot;display&quot;,
+    &quot;dominant-baseline&quot;, &quot;drop-initial-after-adjust&quot;,
+    &quot;drop-initial-after-align&quot;, &quot;drop-initial-before-adjust&quot;,
+    &quot;drop-initial-before-align&quot;, &quot;drop-initial-size&quot;, &quot;drop-initial-value&quot;,
+    &quot;elevation&quot;, &quot;empty-cells&quot;, &quot;fit&quot;, &quot;fit-position&quot;, &quot;flex&quot;, &quot;flex-basis&quot;,
+    &quot;flex-direction&quot;, &quot;flex-flow&quot;, &quot;flex-grow&quot;, &quot;flex-shrink&quot;, &quot;flex-wrap&quot;,
+    &quot;float&quot;, &quot;float-offset&quot;, &quot;flow-from&quot;, &quot;flow-into&quot;, &quot;font&quot;, &quot;font-feature-settings&quot;,
+    &quot;font-family&quot;, &quot;font-kerning&quot;, &quot;font-language-override&quot;, &quot;font-size&quot;, &quot;font-size-adjust&quot;,
+    &quot;font-stretch&quot;, &quot;font-style&quot;, &quot;font-synthesis&quot;, &quot;font-variant&quot;,
+    &quot;font-variant-alternates&quot;, &quot;font-variant-caps&quot;, &quot;font-variant-east-asian&quot;,
+    &quot;font-variant-ligatures&quot;, &quot;font-variant-numeric&quot;, &quot;font-variant-position&quot;,
+    &quot;font-weight&quot;, &quot;grid-cell&quot;, &quot;grid-column&quot;, &quot;grid-column-align&quot;,
+    &quot;grid-column-sizing&quot;, &quot;grid-column-span&quot;, &quot;grid-columns&quot;, &quot;grid-flow&quot;,
+    &quot;grid-row&quot;, &quot;grid-row-align&quot;, &quot;grid-row-sizing&quot;, &quot;grid-row-span&quot;,
+    &quot;grid-rows&quot;, &quot;grid-template&quot;, &quot;hanging-punctuation&quot;, &quot;height&quot;, &quot;hyphens&quot;,
+    &quot;icon&quot;, &quot;image-orientation&quot;, &quot;image-rendering&quot;, &quot;image-resolution&quot;,
+    &quot;inline-box-align&quot;, &quot;justify-content&quot;, &quot;left&quot;, &quot;letter-spacing&quot;,
+    &quot;line-break&quot;, &quot;line-height&quot;, &quot;line-stacking&quot;, &quot;line-stacking-ruby&quot;,
+    &quot;line-stacking-shift&quot;, &quot;line-stacking-strategy&quot;, &quot;list-style&quot;,
+    &quot;list-style-image&quot;, &quot;list-style-position&quot;, &quot;list-style-type&quot;, &quot;margin&quot;,
+    &quot;margin-bottom&quot;, &quot;margin-left&quot;, &quot;margin-right&quot;, &quot;margin-top&quot;,
+    &quot;marker-offset&quot;, &quot;marks&quot;, &quot;marquee-direction&quot;, &quot;marquee-loop&quot;,
+    &quot;marquee-play-count&quot;, &quot;marquee-speed&quot;, &quot;marquee-style&quot;, &quot;max-height&quot;,
+    &quot;max-width&quot;, &quot;min-height&quot;, &quot;min-width&quot;, &quot;move-to&quot;, &quot;nav-down&quot;, &quot;nav-index&quot;,
+    &quot;nav-left&quot;, &quot;nav-right&quot;, &quot;nav-up&quot;, &quot;opacity&quot;, &quot;order&quot;, &quot;orphans&quot;, &quot;outline&quot;,
+    &quot;outline-color&quot;, &quot;outline-offset&quot;, &quot;outline-style&quot;, &quot;outline-width&quot;,
+    &quot;overflow&quot;, &quot;overflow-style&quot;, &quot;overflow-wrap&quot;, &quot;overflow-x&quot;, &quot;overflow-y&quot;,
+    &quot;padding&quot;, &quot;padding-bottom&quot;, &quot;padding-left&quot;, &quot;padding-right&quot;, &quot;padding-top&quot;,
+    &quot;page&quot;, &quot;page-break-after&quot;, &quot;page-break-before&quot;, &quot;page-break-inside&quot;,
+    &quot;page-policy&quot;, &quot;pause&quot;, &quot;pause-after&quot;, &quot;pause-before&quot;, &quot;perspective&quot;,
+    &quot;perspective-origin&quot;, &quot;pitch&quot;, &quot;pitch-range&quot;, &quot;play-during&quot;, &quot;position&quot;,
+    &quot;presentation-level&quot;, &quot;punctuation-trim&quot;, &quot;quotes&quot;, &quot;region-break-after&quot;,
+    &quot;region-break-before&quot;, &quot;region-break-inside&quot;, &quot;region-fragment&quot;,
+    &quot;rendering-intent&quot;, &quot;resize&quot;, &quot;rest&quot;, &quot;rest-after&quot;, &quot;rest-before&quot;, &quot;richness&quot;,
+    &quot;right&quot;, &quot;rotation&quot;, &quot;rotation-point&quot;, &quot;ruby-align&quot;, &quot;ruby-overhang&quot;,
+    &quot;ruby-position&quot;, &quot;ruby-span&quot;, &quot;shape-inside&quot;, &quot;shape-outside&quot;, &quot;size&quot;,
+    &quot;speak&quot;, &quot;speak-as&quot;, &quot;speak-header&quot;,
+    &quot;speak-numeral&quot;, &quot;speak-punctuation&quot;, &quot;speech-rate&quot;, &quot;stress&quot;, &quot;string-set&quot;,
+    &quot;tab-size&quot;, &quot;table-layout&quot;, &quot;target&quot;, &quot;target-name&quot;, &quot;target-new&quot;,
+    &quot;target-position&quot;, &quot;text-align&quot;, &quot;text-align-last&quot;, &quot;text-decoration&quot;,
+    &quot;text-decoration-color&quot;, &quot;text-decoration-line&quot;, &quot;text-decoration-skip&quot;,
+    &quot;text-decoration-style&quot;, &quot;text-emphasis&quot;, &quot;text-emphasis-color&quot;,
+    &quot;text-emphasis-position&quot;, &quot;text-emphasis-style&quot;, &quot;text-height&quot;,
+    &quot;text-indent&quot;, &quot;text-justify&quot;, &quot;text-outline&quot;, &quot;text-overflow&quot;, &quot;text-shadow&quot;,
+    &quot;text-size-adjust&quot;, &quot;text-space-collapse&quot;, &quot;text-transform&quot;, &quot;text-underline-position&quot;,
+    &quot;text-wrap&quot;, &quot;top&quot;, &quot;transform&quot;, &quot;transform-origin&quot;, &quot;transform-style&quot;,
+    &quot;transition&quot;, &quot;transition-delay&quot;, &quot;transition-duration&quot;,
+    &quot;transition-property&quot;, &quot;transition-timing-function&quot;, &quot;unicode-bidi&quot;,
+    &quot;vertical-align&quot;, &quot;visibility&quot;, &quot;voice-balance&quot;, &quot;voice-duration&quot;,
+    &quot;voice-family&quot;, &quot;voice-pitch&quot;, &quot;voice-range&quot;, &quot;voice-rate&quot;, &quot;voice-stress&quot;,
+    &quot;voice-volume&quot;, &quot;volume&quot;, &quot;white-space&quot;, &quot;widows&quot;, &quot;width&quot;, &quot;word-break&quot;,
+    &quot;word-spacing&quot;, &quot;word-wrap&quot;, &quot;z-index&quot;, &quot;zoom&quot;,
+    // SVG-specific
+    &quot;clip-path&quot;, &quot;clip-rule&quot;, &quot;mask&quot;, &quot;enable-background&quot;, &quot;filter&quot;, &quot;flood-color&quot;,
+    &quot;flood-opacity&quot;, &quot;lighting-color&quot;, &quot;stop-color&quot;, &quot;stop-opacity&quot;, &quot;pointer-events&quot;,
+    &quot;color-interpolation&quot;, &quot;color-interpolation-filters&quot;, &quot;color-profile&quot;,
+    &quot;color-rendering&quot;, &quot;fill&quot;, &quot;fill-opacity&quot;, &quot;fill-rule&quot;, &quot;image-rendering&quot;,
+    &quot;marker&quot;, &quot;marker-end&quot;, &quot;marker-mid&quot;, &quot;marker-start&quot;, &quot;shape-rendering&quot;, &quot;stroke&quot;,
+    &quot;stroke-dasharray&quot;, &quot;stroke-dashoffset&quot;, &quot;stroke-linecap&quot;, &quot;stroke-linejoin&quot;,
+    &quot;stroke-miterlimit&quot;, &quot;stroke-opacity&quot;, &quot;stroke-width&quot;, &quot;text-rendering&quot;,
+    &quot;baseline-shift&quot;, &quot;dominant-baseline&quot;, &quot;glyph-orientation-horizontal&quot;,
+    &quot;glyph-orientation-vertical&quot;, &quot;kerning&quot;, &quot;text-anchor&quot;, &quot;writing-mode&quot;
+  ]);
+
+  var colorKeywords = keySet([
+    &quot;aliceblue&quot;, &quot;antiquewhite&quot;, &quot;aqua&quot;, &quot;aquamarine&quot;, &quot;azure&quot;, &quot;beige&quot;,
+    &quot;bisque&quot;, &quot;black&quot;, &quot;blanchedalmond&quot;, &quot;blue&quot;, &quot;blueviolet&quot;, &quot;brown&quot;,
+    &quot;burlywood&quot;, &quot;cadetblue&quot;, &quot;chartreuse&quot;, &quot;chocolate&quot;, &quot;coral&quot;, &quot;cornflowerblue&quot;,
+    &quot;cornsilk&quot;, &quot;crimson&quot;, &quot;cyan&quot;, &quot;darkblue&quot;, &quot;darkcyan&quot;, &quot;darkgoldenrod&quot;,
+    &quot;darkgray&quot;, &quot;darkgreen&quot;, &quot;darkkhaki&quot;, &quot;darkmagenta&quot;, &quot;darkolivegreen&quot;,
+    &quot;darkorange&quot;, &quot;darkorchid&quot;, &quot;darkred&quot;, &quot;darksalmon&quot;, &quot;darkseagreen&quot;,
+    &quot;darkslateblue&quot;, &quot;darkslategray&quot;, &quot;darkturquoise&quot;, &quot;darkviolet&quot;,
+    &quot;deeppink&quot;, &quot;deepskyblue&quot;, &quot;dimgray&quot;, &quot;dodgerblue&quot;, &quot;firebrick&quot;,
+    &quot;floralwhite&quot;, &quot;forestgreen&quot;, &quot;fuchsia&quot;, &quot;gainsboro&quot;, &quot;ghostwhite&quot;,
+    &quot;gold&quot;, &quot;goldenrod&quot;, &quot;gray&quot;, &quot;grey&quot;, &quot;green&quot;, &quot;greenyellow&quot;, &quot;honeydew&quot;,
+    &quot;hotpink&quot;, &quot;indianred&quot;, &quot;indigo&quot;, &quot;ivory&quot;, &quot;khaki&quot;, &quot;lavender&quot;,
+    &quot;lavenderblush&quot;, &quot;lawngreen&quot;, &quot;lemonchiffon&quot;, &quot;lightblue&quot;, &quot;lightcoral&quot;,
+    &quot;lightcyan&quot;, &quot;lightgoldenrodyellow&quot;, &quot;lightgray&quot;, &quot;lightgreen&quot;, &quot;lightpink&quot;,
+    &quot;lightsalmon&quot;, &quot;lightseagreen&quot;, &quot;lightskyblue&quot;, &quot;lightslategray&quot;,
+    &quot;lightsteelblue&quot;, &quot;lightyellow&quot;, &quot;lime&quot;, &quot;limegreen&quot;, &quot;linen&quot;, &quot;magenta&quot;,
+    &quot;maroon&quot;, &quot;mediumaquamarine&quot;, &quot;mediumblue&quot;, &quot;mediumorchid&quot;, &quot;mediumpurple&quot;,
+    &quot;mediumseagreen&quot;, &quot;mediumslateblue&quot;, &quot;mediumspringgreen&quot;, &quot;mediumturquoise&quot;,
+    &quot;mediumvioletred&quot;, &quot;midnightblue&quot;, &quot;mintcream&quot;, &quot;mistyrose&quot;, &quot;moccasin&quot;,
+    &quot;navajowhite&quot;, &quot;navy&quot;, &quot;oldlace&quot;, &quot;olive&quot;, &quot;olivedrab&quot;, &quot;orange&quot;, &quot;orangered&quot;,
+    &quot;orchid&quot;, &quot;palegoldenrod&quot;, &quot;palegreen&quot;, &quot;paleturquoise&quot;, &quot;palevioletred&quot;,
+    &quot;papayawhip&quot;, &quot;peachpuff&quot;, &quot;peru&quot;, &quot;pink&quot;, &quot;plum&quot;, &quot;powderblue&quot;,
+    &quot;purple&quot;, &quot;red&quot;, &quot;rosybrown&quot;, &quot;royalblue&quot;, &quot;saddlebrown&quot;, &quot;salmon&quot;,
+    &quot;sandybrown&quot;, &quot;seagreen&quot;, &quot;seashell&quot;, &quot;sienna&quot;, &quot;silver&quot;, &quot;skyblue&quot;,
+    &quot;slateblue&quot;, &quot;slategray&quot;, &quot;snow&quot;, &quot;springgreen&quot;, &quot;steelblue&quot;, &quot;tan&quot;,
+    &quot;teal&quot;, &quot;thistle&quot;, &quot;tomato&quot;, &quot;turquoise&quot;, &quot;violet&quot;, &quot;wheat&quot;, &quot;white&quot;,
+    &quot;whitesmoke&quot;, &quot;yellow&quot;, &quot;yellowgreen&quot;
+  ]);
+
+  var valueKeywords = keySet([
+    &quot;above&quot;, &quot;absolute&quot;, &quot;activeborder&quot;, &quot;activecaption&quot;, &quot;afar&quot;,
+    &quot;after-white-space&quot;, &quot;ahead&quot;, &quot;alias&quot;, &quot;all&quot;, &quot;all-scroll&quot;, &quot;alternate&quot;,
+    &quot;always&quot;, &quot;amharic&quot;, &quot;amharic-abegede&quot;, &quot;antialiased&quot;, &quot;appworkspace&quot;,
+    &quot;arabic-indic&quot;, &quot;armenian&quot;, &quot;asterisks&quot;, &quot;auto&quot;, &quot;avoid&quot;, &quot;avoid-column&quot;, &quot;avoid-page&quot;,
+    &quot;avoid-region&quot;, &quot;background&quot;, &quot;backwards&quot;, &quot;baseline&quot;, &quot;below&quot;, &quot;bidi-override&quot;, &quot;binary&quot;,
+    &quot;bengali&quot;, &quot;blink&quot;, &quot;block&quot;, &quot;block-axis&quot;, &quot;bold&quot;, &quot;bolder&quot;, &quot;border&quot;, &quot;border-box&quot;,
+    &quot;both&quot;, &quot;bottom&quot;, &quot;break&quot;, &quot;break-all&quot;, &quot;break-word&quot;, &quot;button&quot;, &quot;button-bevel&quot;,
+    &quot;buttonface&quot;, &quot;buttonhighlight&quot;, &quot;buttonshadow&quot;, &quot;buttontext&quot;, &quot;cambodian&quot;,
+    &quot;capitalize&quot;, &quot;caps-lock-indicator&quot;, &quot;caption&quot;, &quot;captiontext&quot;, &quot;caret&quot;,
+    &quot;cell&quot;, &quot;center&quot;, &quot;checkbox&quot;, &quot;circle&quot;, &quot;cjk-earthly-branch&quot;,
+    &quot;cjk-heavenly-stem&quot;, &quot;cjk-ideographic&quot;, &quot;clear&quot;, &quot;clip&quot;, &quot;close-quote&quot;,
+    &quot;col-resize&quot;, &quot;collapse&quot;, &quot;column&quot;, &quot;compact&quot;, &quot;condensed&quot;, &quot;contain&quot;, &quot;content&quot;,
+    &quot;content-box&quot;, &quot;context-menu&quot;, &quot;continuous&quot;, &quot;copy&quot;, &quot;cover&quot;, &quot;crop&quot;,
+    &quot;cross&quot;, &quot;crosshair&quot;, &quot;currentcolor&quot;, &quot;cursive&quot;, &quot;dashed&quot;, &quot;decimal&quot;,
+    &quot;decimal-leading-zero&quot;, &quot;default&quot;, &quot;default-button&quot;, &quot;destination-atop&quot;,
+    &quot;destination-in&quot;, &quot;destination-out&quot;, &quot;destination-over&quot;, &quot;devanagari&quot;,
+    &quot;disc&quot;, &quot;discard&quot;, &quot;document&quot;, &quot;dot-dash&quot;, &quot;dot-dot-dash&quot;, &quot;dotted&quot;,
+    &quot;double&quot;, &quot;down&quot;, &quot;e-resize&quot;, &quot;ease&quot;, &quot;ease-in&quot;, &quot;ease-in-out&quot;, &quot;ease-out&quot;,
+    &quot;element&quot;, &quot;ellipse&quot;, &quot;ellipsis&quot;, &quot;embed&quot;, &quot;end&quot;, &quot;ethiopic&quot;, &quot;ethiopic-abegede&quot;,
+    &quot;ethiopic-abegede-am-et&quot;, &quot;ethiopic-abegede-gez&quot;, &quot;ethiopic-abegede-ti-er&quot;,
+    &quot;ethiopic-abegede-ti-et&quot;, &quot;ethiopic-halehame-aa-er&quot;,
+    &quot;ethiopic-halehame-aa-et&quot;, &quot;ethiopic-halehame-am-et&quot;,
+    &quot;ethiopic-halehame-gez&quot;, &quot;ethiopic-halehame-om-et&quot;,
+    &quot;ethiopic-halehame-sid-et&quot;, &quot;ethiopic-halehame-so-et&quot;,
+    &quot;ethiopic-halehame-ti-er&quot;, &quot;ethiopic-halehame-ti-et&quot;,
+    &quot;ethiopic-halehame-tig&quot;, &quot;ew-resize&quot;, &quot;expanded&quot;, &quot;extra-condensed&quot;,
+    &quot;extra-expanded&quot;, &quot;fantasy&quot;, &quot;fast&quot;, &quot;fill&quot;, &quot;fixed&quot;, &quot;flat&quot;, &quot;footnotes&quot;,
+    &quot;forwards&quot;, &quot;from&quot;, &quot;geometricPrecision&quot;, &quot;georgian&quot;, &quot;graytext&quot;, &quot;groove&quot;,
+    &quot;gujarati&quot;, &quot;gurmukhi&quot;, &quot;hand&quot;, &quot;hangul&quot;, &quot;hangul-consonant&quot;, &quot;hebrew&quot;,
+    &quot;help&quot;, &quot;hidden&quot;, &quot;hide&quot;, &quot;higher&quot;, &quot;highlight&quot;, &quot;highlighttext&quot;,
+    &quot;hiragana&quot;, &quot;hiragana-iroha&quot;, &quot;horizontal&quot;, &quot;hsl&quot;, &quot;hsla&quot;, &quot;icon&quot;, &quot;ignore&quot;,
+    &quot;inactiveborder&quot;, &quot;inactivecaption&quot;, &quot;inactivecaptiontext&quot;, &quot;infinite&quot;,
+    &quot;infobackground&quot;, &quot;infotext&quot;, &quot;inherit&quot;, &quot;initial&quot;, &quot;inline&quot;, &quot;inline-axis&quot;,
+    &quot;inline-block&quot;, &quot;inline-table&quot;, &quot;inset&quot;, &quot;inside&quot;, &quot;intrinsic&quot;, &quot;invert&quot;,
+    &quot;italic&quot;, &quot;justify&quot;, &quot;kannada&quot;, &quot;katakana&quot;, &quot;katakana-iroha&quot;, &quot;keep-all&quot;, &quot;khmer&quot;,
+    &quot;landscape&quot;, &quot;lao&quot;, &quot;large&quot;, &quot;larger&quot;, &quot;left&quot;, &quot;level&quot;, &quot;lighter&quot;,
+    &quot;line-through&quot;, &quot;linear&quot;, &quot;lines&quot;, &quot;list-item&quot;, &quot;listbox&quot;, &quot;listitem&quot;,
+    &quot;local&quot;, &quot;logical&quot;, &quot;loud&quot;, &quot;lower&quot;, &quot;lower-alpha&quot;, &quot;lower-armenian&quot;,
+    &quot;lower-greek&quot;, &quot;lower-hexadecimal&quot;, &quot;lower-latin&quot;, &quot;lower-norwegian&quot;,
+    &quot;lower-roman&quot;, &quot;lowercase&quot;, &quot;ltr&quot;, &quot;malayalam&quot;, &quot;match&quot;,
+    &quot;media-controls-background&quot;, &quot;media-current-time-display&quot;,
+    &quot;media-fullscreen-button&quot;, &quot;media-mute-button&quot;, &quot;media-play-button&quot;,
+    &quot;media-return-to-realtime-button&quot;, &quot;media-rewind-button&quot;,
+    &quot;media-seek-back-button&quot;, &quot;media-seek-forward-button&quot;, &quot;media-slider&quot;,
+    &quot;media-sliderthumb&quot;, &quot;media-time-remaining-display&quot;, &quot;media-volume-slider&quot;,
+    &quot;media-volume-slider-container&quot;, &quot;media-volume-sliderthumb&quot;, &quot;medium&quot;,
+    &quot;menu&quot;, &quot;menulist&quot;, &quot;menulist-button&quot;, &quot;menulist-text&quot;,
+    &quot;menulist-textfield&quot;, &quot;menutext&quot;, &quot;message-box&quot;, &quot;middle&quot;, &quot;min-intrinsic&quot;,
+    &quot;mix&quot;, &quot;mongolian&quot;, &quot;monospace&quot;, &quot;move&quot;, &quot;multiple&quot;, &quot;myanmar&quot;, &quot;n-resize&quot;,
+    &quot;narrower&quot;, &quot;ne-resize&quot;, &quot;nesw-resize&quot;, &quot;no-close-quote&quot;, &quot;no-drop&quot;,
+    &quot;no-open-quote&quot;, &quot;no-repeat&quot;, &quot;none&quot;, &quot;normal&quot;, &quot;not-allowed&quot;, &quot;nowrap&quot;,
+    &quot;ns-resize&quot;, &quot;nw-resize&quot;, &quot;nwse-resize&quot;, &quot;oblique&quot;, &quot;octal&quot;, &quot;open-quote&quot;,
+    &quot;optimizeLegibility&quot;, &quot;optimizeSpeed&quot;, &quot;oriya&quot;, &quot;oromo&quot;, &quot;outset&quot;,
+    &quot;outside&quot;, &quot;outside-shape&quot;, &quot;overlay&quot;, &quot;overline&quot;, &quot;padding&quot;, &quot;padding-box&quot;,
+    &quot;painted&quot;, &quot;page&quot;, &quot;paused&quot;, &quot;persian&quot;, &quot;plus-darker&quot;, &quot;plus-lighter&quot;, &quot;pointer&quot;,
+    &quot;polygon&quot;, &quot;portrait&quot;, &quot;pre&quot;, &quot;pre-line&quot;, &quot;pre-wrap&quot;, &quot;preserve-3d&quot;, &quot;progress&quot;, &quot;push-button&quot;,
+    &quot;radio&quot;, &quot;read-only&quot;, &quot;read-write&quot;, &quot;read-write-plaintext-only&quot;, &quot;rectangle&quot;, &quot;region&quot;,
+    &quot;relative&quot;, &quot;repeat&quot;, &quot;repeat-x&quot;, &quot;repeat-y&quot;, &quot;reset&quot;, &quot;reverse&quot;, &quot;rgb&quot;, &quot;rgba&quot;,
+    &quot;ridge&quot;, &quot;right&quot;, &quot;round&quot;, &quot;row-resize&quot;, &quot;rtl&quot;, &quot;run-in&quot;, &quot;running&quot;,
+    &quot;s-resize&quot;, &quot;sans-serif&quot;, &quot;scroll&quot;, &quot;scrollbar&quot;, &quot;se-resize&quot;, &quot;searchfield&quot;,
+    &quot;searchfield-cancel-button&quot;, &quot;searchfield-decoration&quot;,
+    &quot;searchfield-results-button&quot;, &quot;searchfield-results-decoration&quot;,
+    &quot;semi-condensed&quot;, &quot;semi-expanded&quot;, &quot;separate&quot;, &quot;serif&quot;, &quot;show&quot;, &quot;sidama&quot;,
+    &quot;single&quot;, &quot;skip-white-space&quot;, &quot;slide&quot;, &quot;slider-horizontal&quot;,
+    &quot;slider-vertical&quot;, &quot;sliderthumb-horizontal&quot;, &quot;sliderthumb-vertical&quot;, &quot;slow&quot;,
+    &quot;small&quot;, &quot;small-caps&quot;, &quot;small-caption&quot;, &quot;smaller&quot;, &quot;solid&quot;, &quot;somali&quot;,
+    &quot;source-atop&quot;, &quot;source-in&quot;, &quot;source-out&quot;, &quot;source-over&quot;, &quot;space&quot;, &quot;square&quot;,
+    &quot;square-button&quot;, &quot;start&quot;, &quot;static&quot;, &quot;status-bar&quot;, &quot;stretch&quot;, &quot;stroke&quot;,
+    &quot;sub&quot;, &quot;subpixel-antialiased&quot;, &quot;super&quot;, &quot;sw-resize&quot;, &quot;table&quot;,
+    &quot;table-caption&quot;, &quot;table-cell&quot;, &quot;table-column&quot;, &quot;table-column-group&quot;,
+    &quot;table-footer-group&quot;, &quot;table-header-group&quot;, &quot;table-row&quot;, &quot;table-row-group&quot;,
+    &quot;telugu&quot;, &quot;text&quot;, &quot;text-bottom&quot;, &quot;text-top&quot;, &quot;textarea&quot;, &quot;textfield&quot;, &quot;thai&quot;,
+    &quot;thick&quot;, &quot;thin&quot;, &quot;threeddarkshadow&quot;, &quot;threedface&quot;, &quot;threedhighlight&quot;,
+    &quot;threedlightshadow&quot;, &quot;threedshadow&quot;, &quot;tibetan&quot;, &quot;tigre&quot;, &quot;tigrinya-er&quot;,
+    &quot;tigrinya-er-abegede&quot;, &quot;tigrinya-et&quot;, &quot;tigrinya-et-abegede&quot;, &quot;to&quot;, &quot;top&quot;,
+    &quot;transparent&quot;, &quot;ultra-condensed&quot;, &quot;ultra-expanded&quot;, &quot;underline&quot;, &quot;up&quot;,
+    &quot;upper-alpha&quot;, &quot;upper-armenian&quot;, &quot;upper-greek&quot;, &quot;upper-hexadecimal&quot;,
+    &quot;upper-latin&quot;, &quot;upper-norwegian&quot;, &quot;upper-roman&quot;, &quot;uppercase&quot;, &quot;urdu&quot;, &quot;url&quot;,
+    &quot;vertical&quot;, &quot;vertical-text&quot;, &quot;visible&quot;, &quot;visibleFill&quot;, &quot;visiblePainted&quot;,
+    &quot;visibleStroke&quot;, &quot;visual&quot;, &quot;w-resize&quot;, &quot;wait&quot;, &quot;wave&quot;, &quot;wider&quot;,
+    &quot;window&quot;, &quot;windowframe&quot;, &quot;windowtext&quot;, &quot;x-large&quot;, &quot;x-small&quot;, &quot;xor&quot;,
+    &quot;xx-large&quot;, &quot;xx-small&quot;
+  ]);
+
+  function tokenCComment(stream, state) {
+    var maybeEnd = false, ch;
+    while ((ch = stream.next()) != null) {
+      if (maybeEnd &amp;&amp; ch == &quot;/&quot;) {
+        state.tokenize = null;
+        break;
+      }
+      maybeEnd = (ch == &quot;*&quot;);
+    }
+    return [&quot;comment&quot;, &quot;comment&quot;];
+  }
+
+  CodeMirror.defineMIME(&quot;text/css&quot;, {
+    atMediaTypes: atMediaTypes,
+    atMediaFeatures: atMediaFeatures,
+    propertyKeywords: propertyKeywords,
+    colorKeywords: colorKeywords,
+    valueKeywords: valueKeywords,
+    hooks: {
+      &quot;&lt;&quot;: function(stream, state) {
+        function tokenSGMLComment(stream, state) {
+          var dashes = 0, ch;
+          while ((ch = stream.next()) != null) {
+            if (dashes &gt;= 2 &amp;&amp; ch == &quot;&gt;&quot;) {
+              state.tokenize = null;
+              break;
+            }
+            dashes = (ch == &quot;-&quot;) ? dashes + 1 : 0;
+          }
+          return [&quot;comment&quot;, &quot;comment&quot;];
+        }
+        if (stream.eat(&quot;!&quot;)) {
+          state.tokenize = tokenSGMLComment;
+          return tokenSGMLComment(stream, state);
+        }
+      },
+      &quot;/&quot;: function(stream, state) {
+        if (stream.eat(&quot;*&quot;)) {
+          state.tokenize = tokenCComment;
+          return tokenCComment(stream, state);
+        }
+        return false;
+      }
+    },
+    name: &quot;css&quot;
+  });
+
+  CodeMirror.defineMIME(&quot;text/x-scss&quot;, {
+    atMediaTypes: atMediaTypes,
+    atMediaFeatures: atMediaFeatures,
+    propertyKeywords: propertyKeywords,
+    colorKeywords: colorKeywords,
+    valueKeywords: valueKeywords,
+    allowNested: true,
+    hooks: {
+      &quot;:&quot;: function(stream) {
+        if (stream.match(/\s*{/)) {
+          return [null, &quot;{&quot;];
+        }
+        return false;
+      },
+      &quot;$&quot;: function(stream) {
+        stream.match(/^[\w-]+/);
+        if (stream.peek() == &quot;:&quot;) {
+          return [&quot;variable&quot;, &quot;variable-definition&quot;];
+        }
+        return [&quot;variable&quot;, &quot;variable&quot;];
+      },
+      &quot;,&quot;: function(stream, state) {
+        if (state.stack[state.stack.length - 1] == &quot;propertyValue&quot; &amp;&amp; stream.match(/^ *\$/, false)) {
+          return [&quot;operator&quot;, &quot;;&quot;];
+        }
+      },
+      &quot;/&quot;: function(stream, state) {
+        if (stream.eat(&quot;/&quot;)) {
+          stream.skipToEnd();
+          return [&quot;comment&quot;, &quot;comment&quot;];
+        } else if (stream.eat(&quot;*&quot;)) {
+          state.tokenize = tokenCComment;
+          return tokenCComment(stream, state);
+        } else {
+          return [&quot;operator&quot;, &quot;operator&quot;];
+        }
+      },
+      &quot;#&quot;: function(stream) {
+        if (stream.eat(&quot;{&quot;)) {
+          return [&quot;operator&quot;, &quot;interpolation&quot;];
+        } else {
+          stream.eatWhile(/[\w\\\-]/);
+          return [&quot;atom&quot;, &quot;hash&quot;];
+        }
+      }
+    },
+    name: &quot;css&quot;
+  });
+})();
+</pre>
+</div>
+<div created="20140423165631548" description="HTML embedded" modified="20140423165707739" module-type="library" name="htmlembedded" title="$:/plugins/tiddlywiki/codemirror/mode/htmlembedded.js" type="application/javascript">
+<pre>CodeMirror.defineMode(&quot;htmlembedded&quot;, function(config, parserConfig) {
+
+  //config settings
+  var scriptStartRegex = parserConfig.scriptStartRegex || /^&lt;%/i,
+      scriptEndRegex = parserConfig.scriptEndRegex || /^%&gt;/i;
+
+  //inner modes
+  var scriptingMode, htmlMixedMode;
+
+  //tokenizer when in html mode
+  function htmlDispatch(stream, state) {
+      if (stream.match(scriptStartRegex, false)) {
+          state.token=scriptingDispatch;
+          return scriptingMode.token(stream, state.scriptState);
+          }
+      else
+          return htmlMixedMode.token(stream, state.htmlState);
+    }
+
+  //tokenizer when in scripting mode
+  function scriptingDispatch(stream, state) {
+      if (stream.match(scriptEndRegex, false))  {
+          state.token=htmlDispatch;
+          return htmlMixedMode.token(stream, state.htmlState);
+         }
+      else
+          return scriptingMode.token(stream, state.scriptState);
+         }
+
+
+  return {
+    startState: function() {
+      scriptingMode = scriptingMode || CodeMirror.getMode(config, parserConfig.scriptingModeSpec);
+      htmlMixedMode = htmlMixedMode || CodeMirror.getMode(config, &quot;htmlmixed&quot;);
+      return {
+          token :  parserConfig.startOpen ? scriptingDispatch : htmlDispatch,
+          htmlState : CodeMirror.startState(htmlMixedMode),
+          scriptState : CodeMirror.startState(scriptingMode)
+      };
+    },
+
+    token: function(stream, state) {
+      return state.token(stream, state);
+    },
+
+    indent: function(state, textAfter) {
+      if (state.token == htmlDispatch)
+        return htmlMixedMode.indent(state.htmlState, textAfter);
+      else if (scriptingMode.indent)
+        return scriptingMode.indent(state.scriptState, textAfter);
+    },
+
+    copyState: function(state) {
+      return {
+       token : state.token,
+       htmlState : CodeMirror.copyState(htmlMixedMode, state.htmlState),
+       scriptState : CodeMirror.copyState(scriptingMode, state.scriptState)
+      };
+    },
+
+    electricChars: &quot;/{}:&quot;,
+
+    innerMode: function(state) {
+      if (state.token == scriptingDispatch) return {state: state.scriptState, mode: scriptingMode};
+      else return {state: state.htmlState, mode: htmlMixedMode};
+    }
+  };
+}, &quot;htmlmixed&quot;);
+
+CodeMirror.defineMIME(&quot;application/x-ejs&quot;, { name: &quot;htmlembedded&quot;, scriptingModeSpec:&quot;javascript&quot;});
+CodeMirror.defineMIME(&quot;application/x-aspx&quot;, { name: &quot;htmlembedded&quot;, scriptingModeSpec:&quot;text/x-csharp&quot;});
+CodeMirror.defineMIME(&quot;application/x-jsp&quot;, { name: &quot;htmlembedded&quot;, scriptingModeSpec:&quot;text/x-java&quot;});
+CodeMirror.defineMIME(&quot;application/x-erb&quot;, { name: &quot;htmlembedded&quot;, scriptingModeSpec:&quot;ruby&quot;});
+</pre>
+</div>
+<div created="20140423184441989" description="HTML mixed" modified="20140423184613284" module-type="library" name="mixedMode" title="$:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js" type="application/javascript">
 <pre>CodeMirror.defineMode(&quot;htmlmixed&quot;, function(config, parserConfig) {
   var htmlMode = CodeMirror.getMode(config, {name: &quot;xml&quot;, htmlMode: true});
   var cssMode = CodeMirror.getMode(config, &quot;css&quot;);
@@ -10625,7 +12232,7 @@ For example:
 CodeMirror.defineMIME(&quot;text/html&quot;, &quot;htmlmixed&quot;);
 </pre>
 </div>
-<div created="20140422183037277" description="Javascript" modified="20140423001421780" module-type="library" name="javascript" title="$:/plugins/tiddlywiki/codemirror/mode/javascript.js" type="application/javascript">
+<div created="20140422183037277" description="Javascript" modified="20140423162458951" module-type="library" name="javascript" title="$:/plugins/tiddlywiki/codemirror/mode/javascript.js" type="application/javascript">
 <pre>// TODO actually recognize syntax of TypeScript constructs
 
 CodeMirror.defineMode(&quot;javascript&quot;, function(config, parserConfig) {
@@ -11245,7 +12852,142 @@ CodeMirror.defineMIME(&quot;text/typescript&quot;, { name: &quot;javascript&quot
 CodeMirror.defineMIME(&quot;application/typescript&quot;, { name: &quot;javascript&quot;, typescript: true });
 </pre>
 </div>
-<div created="20140422234748184" description="Visual Basic Script" modified="20140423002013454" module-type="library" name="vbscript" title="$:/plugins/tiddlywiki/codemirror/mode/vbscript.js" type="application/javascript">
+<div created="20140423183831115" description="PHP" modified="20140423184051879" module-type="library" name="application/x-httpd-php" title="$:/plugins/tiddlywiki/codemirror/mode/php.js" type="application/javascript">
+<pre>(function() {
+  function keywords(str) {
+    var obj = {}, words = str.split(&quot; &quot;);
+    for (var i = 0; i &lt; words.length; ++i) obj[words[i]] = true;
+    return obj;
+  }
+  function heredoc(delim) {
+    return function(stream, state) {
+      if (stream.match(delim)) state.tokenize = null;
+      else stream.skipToEnd();
+      return &quot;string&quot;;
+    };
+  }
+  var phpConfig = {
+    name: &quot;clike&quot;,
+    keywords: keywords(&quot;abstract and array as break case catch class clone const continue declare default &quot; +
+                       &quot;do else elseif enddeclare endfor endforeach endif endswitch endwhile extends final &quot; +
+                       &quot;for foreach function global goto if implements interface instanceof namespace &quot; +
+                       &quot;new or private protected public static switch throw trait try use var while xor &quot; +
+                       &quot;die echo empty exit eval include include_once isset list require require_once return &quot; +
+                       &quot;print unset __halt_compiler self static parent yield insteadof finally&quot;),
+    blockKeywords: keywords(&quot;catch do else elseif for foreach if switch try while finally&quot;),
+    atoms: keywords(&quot;true false null TRUE FALSE NULL __CLASS__ __DIR__ __FILE__ __LINE__ __METHOD__ __FUNCTION__ __NAMESPACE__ __TRAIT__&quot;),
+    builtin: keywords(&quot;func_num_args func_get_arg func_get_args strlen strcmp strncmp strcasecmp strncasecmp each error_reporting define defined trigger_error user_error set_error_handler restore_error_handler get_declared_classes get_loaded_extensions extension_loaded get_extension_funcs debug_backtrace constant bin2hex hex2bin sleep usleep time mktime gmmktime strftime gmstrftime strtotime date gmdate getdate localtime checkdate flush wordwrap htmlspecialchars htmlentities html_entity_decode md5 md5_file crc32 getimagesize image_type_to_mime_type phpinfo phpversion phpcredits strnatcmp strnatcasecmp substr_count strspn strcspn strtok strtoupper strtolower strpos strrpos strrev hebrev hebrevc nl2br basename dirname pathinfo stripslashes stripcslashes strstr stristr strrchr str_shuffle str_word_count strcoll substr substr_replace quotemeta ucfirst ucwords strtr addslashes addcslashes rtrim str_replace str_repeat count_chars chunk_split trim ltrim strip_tags similar_text explode implode setlocale localeconv parse_str str_pad chop strchr sprintf printf vprintf vsprintf sscanf fscanf parse_url urlencode urldecode rawurlencode rawurldecode readlink linkinfo link unlink exec system escapeshellcmd escapeshellarg passthru shell_exec proc_open proc_close rand srand getrandmax mt_rand mt_srand mt_getrandmax base64_decode base64_encode abs ceil floor round is_finite is_nan is_infinite bindec hexdec octdec decbin decoct dechex base_convert number_format fmod ip2long long2ip getenv putenv getopt microtime gettimeofday getrusage uniqid quoted_printable_decode set_time_limit get_cfg_var magic_quotes_runtime set_magic_quotes_runtime get_magic_quotes_gpc get_magic_quotes_runtime import_request_variables error_log serialize unserialize memory_get_usage var_dump var_export debug_zval_dump print_r highlight_file show_source highlight_string ini_get ini_get_all ini_set ini_alter ini_restore get_include_path set_include_path restore_include_path setcookie header headers_sent connection_aborted connection_status ignore_user_abort parse_ini_file is_uploaded_file move_uploaded_file intval floatval doubleval strval gettype settype is_null is_resource is_bool is_long is_float is_int is_integer is_double is_real is_numeric is_string is_array is_object is_scalar ereg ereg_replace eregi eregi_replace split spliti join sql_regcase dl pclose popen readfile rewind rmdir umask fclose feof fgetc fgets fgetss fread fopen fpassthru ftruncate fstat fseek ftell fflush fwrite fputs mkdir rename copy tempnam tmpfile file file_get_contents stream_select stream_context_create stream_context_set_params stream_context_set_option stream_context_get_options stream_filter_prepend stream_filter_append fgetcsv flock get_meta_tags stream_set_write_buffer set_file_buffer set_socket_blocking stream_set_blocking socket_set_blocking stream_get_meta_data stream_register_wrapper stream_wrapper_register stream_set_timeout socket_set_timeout socket_get_status realpath fnmatch fsockopen pfsockopen pack unpack get_browser crypt opendir closedir chdir getcwd rewinddir readdir dir glob fileatime filectime filegroup fileinode filemtime fileowner fileperms filesize filetype file_exists is_writable is_writeable is_readable is_executable is_file is_dir is_link stat lstat chown touch clearstatcache mail ob_start ob_flush ob_clean ob_end_flush ob_end_clean ob_get_flush ob_get_clean ob_get_length ob_get_level ob_get_status ob_get_contents ob_implicit_flush ob_list_handlers ksort krsort natsort natcasesort asort arsort sort rsort usort uasort uksort shuffle array_walk count end prev next reset current key min max in_array array_search extract compact array_fill range array_multisort array_push array_pop array_shift array_unshift array_splice array_slice array_merge array_merge_recursive array_keys array_values array_count_values array_reverse array_reduce array_pad array_flip array_change_key_case array_rand array_unique array_intersect array_intersect_assoc array_diff array_diff_assoc array_sum array_filter array_map array_chunk array_key_exists pos sizeof key_exists assert assert_options version_compare ftok str_rot13 aggregate session_name session_module_name session_save_path session_id session_regenerate_id session_decode session_register session_unregister session_is_registered session_encode session_start session_destroy session_unset session_set_save_handler session_cache_limiter session_cache_expire session_set_cookie_params session_get_cookie_params session_write_close preg_match preg_match_all preg_replace preg_replace_callback preg_split preg_quote preg_grep overload ctype_alnum ctype_alpha ctype_cntrl ctype_digit ctype_lower ctype_graph ctype_print ctype_punct ctype_space ctype_upper ctype_xdigit virtual apache_request_headers apache_note apache_lookup_uri apache_child_terminate apache_setenv apache_response_headers apache_get_version getallheaders mysql_connect mysql_pconnect mysql_close mysql_select_db mysql_create_db mysql_drop_db mysql_query mysql_unbuffered_query mysql_db_query mysql_list_dbs mysql_list_tables mysql_list_fields mysql_list_processes mysql_error mysql_errno mysql_affected_rows mysql_insert_id mysql_result mysql_num_rows mysql_num_fields mysql_fetch_row mysql_fetch_array mysql_fetch_assoc mysql_fetch_object mysql_data_seek mysql_fetch_lengths mysql_fetch_field mysql_field_seek mysql_free_result mysql_field_name mysql_field_table mysql_field_len mysql_field_type mysql_field_flags mysql_escape_string mysql_real_escape_string mysql_stat mysql_thread_id mysql_client_encoding mysql_get_client_info mysql_get_host_info mysql_get_proto_info mysql_get_server_info mysql_info mysql mysql_fieldname mysql_fieldtable mysql_fieldlen mysql_fieldtype mysql_fieldflags mysql_selectdb mysql_createdb mysql_dropdb mysql_freeresult mysql_numfields mysql_numrows mysql_listdbs mysql_listtables mysql_listfields mysql_db_name mysql_dbname mysql_tablename mysql_table_name pg_connect pg_pconnect pg_close pg_connection_status pg_connection_busy pg_connection_reset pg_host pg_dbname pg_port pg_tty pg_options pg_ping pg_query pg_send_query pg_cancel_query pg_fetch_result pg_fetch_row pg_fetch_assoc pg_fetch_array pg_fetch_object pg_fetch_all pg_affected_rows pg_get_result pg_result_seek pg_result_status pg_free_result pg_last_oid pg_num_rows pg_num_fields pg_field_name pg_field_num pg_field_size pg_field_type pg_field_prtlen pg_field_is_null pg_get_notify pg_get_pid pg_result_error pg_last_error pg_last_notice pg_put_line pg_end_copy pg_copy_to pg_copy_from pg_trace pg_untrace pg_lo_create pg_lo_unlink pg_lo_open pg_lo_close pg_lo_read pg_lo_write pg_lo_read_all pg_lo_import pg_lo_export pg_lo_seek pg_lo_tell pg_escape_string pg_escape_bytea pg_unescape_bytea pg_client_encoding pg_set_client_encoding pg_meta_data pg_convert pg_insert pg_update pg_delete pg_select pg_exec pg_getlastoid pg_cmdtuples pg_errormessage pg_numrows pg_numfields pg_fieldname pg_fieldsize pg_fieldtype pg_fieldnum pg_fieldprtlen pg_fieldisnull pg_freeresult pg_result pg_loreadall pg_locreate pg_lounlink pg_loopen pg_loclose pg_loread pg_lowrite pg_loimport pg_loexport http_response_code get_declared_traits getimagesizefromstring socket_import_stream stream_set_chunk_size trait_exists header_register_callback class_uses session_status session_register_shutdown echo print global static exit array empty eval isset unset die include require include_once require_once&quot;),
+    multiLineStrings: true,
+    hooks: {
+      &quot;$&quot;: function(stream) {
+        stream.eatWhile(/[\w\$_]/);
+        return &quot;variable-2&quot;;
+      },
+      &quot;&lt;&quot;: function(stream, state) {
+        if (stream.match(/&lt;&lt;/)) {
+          stream.eatWhile(/[\w\.]/);
+          state.tokenize = heredoc(stream.current().slice(3));
+          return state.tokenize(stream, state);
+        }
+        return false;
+      },
+      &quot;#&quot;: function(stream) {
+        while (!stream.eol() &amp;&amp; !stream.match(&quot;?&gt;&quot;, false)) stream.next();
+        return &quot;comment&quot;;
+      },
+      &quot;/&quot;: function(stream) {
+        if (stream.eat(&quot;/&quot;)) {
+          while (!stream.eol() &amp;&amp; !stream.match(&quot;?&gt;&quot;, false)) stream.next();
+          return &quot;comment&quot;;
+        }
+        return false;
+      }
+    }
+  };
+
+  CodeMirror.defineMode(&quot;php&quot;, function(config, parserConfig) {
+    var htmlMode = CodeMirror.getMode(config, &quot;text/html&quot;);
+    var phpMode = CodeMirror.getMode(config, phpConfig);
+
+    function dispatch(stream, state) {
+      var isPHP = state.curMode == phpMode;
+      if (stream.sol() &amp;&amp; state.pending != '&quot;') state.pending = null;
+      if (!isPHP) {
+        if (stream.match(/^&lt;\?\w*/)) {
+          state.curMode = phpMode;
+          state.curState = state.php;
+          return &quot;meta&quot;;
+        }
+        if (state.pending == '&quot;') {
+          while (!stream.eol() &amp;&amp; stream.next() != '&quot;') {}
+          var style = &quot;string&quot;;
+        } else if (state.pending &amp;&amp; stream.pos &lt; state.pending.end) {
+          stream.pos = state.pending.end;
+          var style = state.pending.style;
+        } else {
+          var style = htmlMode.token(stream, state.curState);
+        }
+        state.pending = null;
+        var cur = stream.current(), openPHP = cur.search(/&lt;\?/);
+        if (openPHP != -1) {
+          if (style == &quot;string&quot; &amp;&amp; /\&quot;$/.test(cur) &amp;&amp; !/\?&gt;/.test(cur)) state.pending = '&quot;';
+          else state.pending = {end: stream.pos, style: style};
+          stream.backUp(cur.length - openPHP);
+        }
+        return style;
+      } else if (isPHP &amp;&amp; state.php.tokenize == null &amp;&amp; stream.match(&quot;?&gt;&quot;)) {
+        state.curMode = htmlMode;
+        state.curState = state.html;
+        return &quot;meta&quot;;
+      } else {
+        return phpMode.token(stream, state.curState);
+      }
+    }
+
+    return {
+      startState: function() {
+        var html = CodeMirror.startState(htmlMode), php = CodeMirror.startState(phpMode);
+        return {html: html,
+                php: php,
+                curMode: parserConfig.startOpen ? phpMode : htmlMode,
+                curState: parserConfig.startOpen ? php : html,
+                pending: null};
+      },
+
+      copyState: function(state) {
+        var html = state.html, htmlNew = CodeMirror.copyState(htmlMode, html),
+            php = state.php, phpNew = CodeMirror.copyState(phpMode, php), cur;
+        if (state.curMode == htmlMode) cur = htmlNew;
+        else cur = phpNew;
+        return {html: htmlNew, php: phpNew, curMode: state.curMode, curState: cur,
+                pending: state.pending};
+      },
+
+      token: dispatch,
+
+      indent: function(state, textAfter) {
+        if ((state.curMode != phpMode &amp;&amp; /^\s*&lt;\//.test(textAfter)) ||
+            (state.curMode == phpMode &amp;&amp; /^\?&gt;/.test(textAfter)))
+          return htmlMode.indent(state.html, textAfter);
+        return state.curMode.indent(state.curState, textAfter);
+      },
+
+      electricChars: &quot;/{}:&quot;,
+      blockCommentStart: &quot;/*&quot;,
+      blockCommentEnd: &quot;*/&quot;,
+      lineComment: &quot;//&quot;,
+
+      innerMode: function(state) { return {state: state.curState, mode: state.curMode}; }
+    };
+  }, &quot;htmlmixed&quot;, &quot;clike&quot;);
+
+  CodeMirror.defineMIME(&quot;application/x-httpd-php&quot;, &quot;php&quot;);
+  CodeMirror.defineMIME(&quot;application/x-httpd-php-open&quot;, {name: &quot;php&quot;, startOpen: true});
+  CodeMirror.defineMIME(&quot;text/x-php&quot;, phpConfig);
+})();
+</pre>
+</div>
+<div created="20140422234748184" description="Visual Basic Script" modified="20140423162520585" module-type="library" name="vbscript" title="$:/plugins/tiddlywiki/codemirror/mode/vbscript.js" type="application/javascript">
 <pre>/*
 For extra ASP classic objects, initialize CodeMirror instance with this option:
     isASP: true
@@ -11581,6 +13323,384 @@ CodeMirror.defineMode(&quot;vbscript&quot;, function(conf, parserConf) {
 
 CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 </div>
+<div created="20140423184839595" description="XML" modified="20140423184920712" module-type="library" name="xml" title="$:/plugins/tiddlywiki/codemirror/mode/xml.js" type="application/javascript">
+<pre>CodeMirror.defineMode(&quot;xml&quot;, function(config, parserConfig) {
+  var indentUnit = config.indentUnit;
+  var multilineTagIndentFactor = parserConfig.multilineTagIndentFactor || 1;
+  var multilineTagIndentPastTag = parserConfig.multilineTagIndentPastTag || true;
+
+  var Kludges = parserConfig.htmlMode ? {
+    autoSelfClosers: {'area': true, 'base': true, 'br': true, 'col': true, 'command': true,
+                      'embed': true, 'frame': true, 'hr': true, 'img': true, 'input': true,
+                      'keygen': true, 'link': true, 'meta': true, 'param': true, 'source': true,
+                      'track': true, 'wbr': true},
+    implicitlyClosed: {'dd': true, 'li': true, 'optgroup': true, 'option': true, 'p': true,
+                       'rp': true, 'rt': true, 'tbody': true, 'td': true, 'tfoot': true,
+                       'th': true, 'tr': true},
+    contextGrabbers: {
+      'dd': {'dd': true, 'dt': true},
+      'dt': {'dd': true, 'dt': true},
+      'li': {'li': true},
+      'option': {'option': true, 'optgroup': true},
+      'optgroup': {'optgroup': true},
+      'p': {'address': true, 'article': true, 'aside': true, 'blockquote': true, 'dir': true,
+            'div': true, 'dl': true, 'fieldset': true, 'footer': true, 'form': true,
+            'h1': true, 'h2': true, 'h3': true, 'h4': true, 'h5': true, 'h6': true,
+            'header': true, 'hgroup': true, 'hr': true, 'menu': true, 'nav': true, 'ol': true,
+            'p': true, 'pre': true, 'section': true, 'table': true, 'ul': true},
+      'rp': {'rp': true, 'rt': true},
+      'rt': {'rp': true, 'rt': true},
+      'tbody': {'tbody': true, 'tfoot': true},
+      'td': {'td': true, 'th': true},
+      'tfoot': {'tbody': true},
+      'th': {'td': true, 'th': true},
+      'thead': {'tbody': true, 'tfoot': true},
+      'tr': {'tr': true}
+    },
+    doNotIndent: {&quot;pre&quot;: true},
+    allowUnquoted: true,
+    allowMissing: true
+  } : {
+    autoSelfClosers: {},
+    implicitlyClosed: {},
+    contextGrabbers: {},
+    doNotIndent: {},
+    allowUnquoted: false,
+    allowMissing: false
+  };
+  var alignCDATA = parserConfig.alignCDATA;
+
+  // Return variables for tokenizers
+  var tagName, type;
+
+  function inText(stream, state) {
+    function chain(parser) {
+      state.tokenize = parser;
+      return parser(stream, state);
+    }
+
+    var ch = stream.next();
+    if (ch == &quot;&lt;&quot;) {
+      if (stream.eat(&quot;!&quot;)) {
+        if (stream.eat(&quot;[&quot;)) {
+          if (stream.match(&quot;CDATA[&quot;)) return chain(inBlock(&quot;atom&quot;, &quot;]]&gt;&quot;));
+          else return null;
+        } else if (stream.match(&quot;--&quot;)) {
+          return chain(inBlock(&quot;comment&quot;, &quot;--&gt;&quot;));
+        } else if (stream.match(&quot;DOCTYPE&quot;, true, true)) {
+          stream.eatWhile(/[\w\._\-]/);
+          return chain(doctype(1));
+        } else {
+          return null;
+        }
+      } else if (stream.eat(&quot;?&quot;)) {
+        stream.eatWhile(/[\w\._\-]/);
+        state.tokenize = inBlock(&quot;meta&quot;, &quot;?&gt;&quot;);
+        return &quot;meta&quot;;
+      } else {
+        var isClose = stream.eat(&quot;/&quot;);
+        tagName = &quot;&quot;;
+        var c;
+        while ((c = stream.eat(/[^\s\u00a0=&lt;&gt;\&quot;\'\/?]/))) tagName += c;
+        if (!tagName) return &quot;tag error&quot;;
+        type = isClose ? &quot;closeTag&quot; : &quot;openTag&quot;;
+        state.tokenize = inTag;
+        return &quot;tag&quot;;
+      }
+    } else if (ch == &quot;&amp;&quot;) {
+      var ok;
+      if (stream.eat(&quot;#&quot;)) {
+        if (stream.eat(&quot;x&quot;)) {
+          ok = stream.eatWhile(/[a-fA-F\d]/) &amp;&amp; stream.eat(&quot;;&quot;);
+        } else {
+          ok = stream.eatWhile(/[\d]/) &amp;&amp; stream.eat(&quot;;&quot;);
+        }
+      } else {
+        ok = stream.eatWhile(/[\w\.\-:]/) &amp;&amp; stream.eat(&quot;;&quot;);
+      }
+      return ok ? &quot;atom&quot; : &quot;error&quot;;
+    } else {
+      stream.eatWhile(/[^&amp;&lt;]/);
+      return null;
+    }
+  }
+
+  function inTag(stream, state) {
+    var ch = stream.next();
+    if (ch == &quot;&gt;&quot; || (ch == &quot;/&quot; &amp;&amp; stream.eat(&quot;&gt;&quot;))) {
+      state.tokenize = inText;
+      type = ch == &quot;&gt;&quot; ? &quot;endTag&quot; : &quot;selfcloseTag&quot;;
+      return &quot;tag&quot;;
+    } else if (ch == &quot;=&quot;) {
+      type = &quot;equals&quot;;
+      return null;
+    } else if (ch == &quot;&lt;&quot;) {
+      state.tokenize = inText;
+      var next = state.tokenize(stream, state);
+      return next ? next + &quot; error&quot; : &quot;error&quot;;
+    } else if (/[\'\&quot;]/.test(ch)) {
+      state.tokenize = inAttribute(ch);
+      state.stringStartCol = stream.column();
+      return state.tokenize(stream, state);
+    } else {
+      stream.eatWhile(/[^\s\u00a0=&lt;&gt;\&quot;\']/);
+      return &quot;word&quot;;
+    }
+  }
+
+  function inAttribute(quote) {
+    var closure = function(stream, state) {
+      while (!stream.eol()) {
+        if (stream.next() == quote) {
+          state.tokenize = inTag;
+          break;
+        }
+      }
+      return &quot;string&quot;;
+    };
+    closure.isInAttribute = true;
+    return closure;
+  }
+
+  function inBlock(style, terminator) {
+    return function(stream, state) {
+      while (!stream.eol()) {
+        if (stream.match(terminator)) {
+          state.tokenize = inText;
+          break;
+        }
+        stream.next();
+      }
+      return style;
+    };
+  }
+  function doctype(depth) {
+    return function(stream, state) {
+      var ch;
+      while ((ch = stream.next()) != null) {
+        if (ch == &quot;&lt;&quot;) {
+          state.tokenize = doctype(depth + 1);
+          return state.tokenize(stream, state);
+        } else if (ch == &quot;&gt;&quot;) {
+          if (depth == 1) {
+            state.tokenize = inText;
+            break;
+          } else {
+            state.tokenize = doctype(depth - 1);
+            return state.tokenize(stream, state);
+          }
+        }
+      }
+      return &quot;meta&quot;;
+    };
+  }
+
+  var curState, curStream, setStyle;
+  function pass() {
+    for (var i = arguments.length - 1; i &gt;= 0; i--) curState.cc.push(arguments[i]);
+  }
+  function cont() {
+    pass.apply(null, arguments);
+    return true;
+  }
+
+  function pushContext(tagName, startOfLine) {
+    var noIndent = Kludges.doNotIndent.hasOwnProperty(tagName) || (curState.context &amp;&amp; curState.context.noIndent);
+    curState.context = {
+      prev: curState.context,
+      tagName: tagName,
+      indent: curState.indented,
+      startOfLine: startOfLine,
+      noIndent: noIndent
+    };
+  }
+  function popContext() {
+    if (curState.context) curState.context = curState.context.prev;
+  }
+
+  function element(type) {
+    if (type == &quot;openTag&quot;) {
+      curState.tagName = tagName;
+      curState.tagStart = curStream.column();
+      return cont(attributes, endtag(curState.startOfLine));
+    } else if (type == &quot;closeTag&quot;) {
+      var err = false;
+      if (curState.context) {
+        if (curState.context.tagName != tagName) {
+          if (Kludges.implicitlyClosed.hasOwnProperty(curState.context.tagName.toLowerCase())) {
+            popContext();
+          }
+          err = !curState.context || curState.context.tagName != tagName;
+        }
+      } else {
+        err = true;
+      }
+      if (err) setStyle = &quot;error&quot;;
+      return cont(endclosetag(err));
+    }
+    return cont();
+  }
+  function endtag(startOfLine) {
+    return function(type) {
+      var tagName = curState.tagName;
+      curState.tagName = curState.tagStart = null;
+      if (type == &quot;selfcloseTag&quot; ||
+          (type == &quot;endTag&quot; &amp;&amp; Kludges.autoSelfClosers.hasOwnProperty(tagName.toLowerCase()))) {
+        maybePopContext(tagName.toLowerCase());
+        return cont();
+      }
+      if (type == &quot;endTag&quot;) {
+        maybePopContext(tagName.toLowerCase());
+        pushContext(tagName, startOfLine);
+        return cont();
+      }
+      return cont();
+    };
+  }
+  function endclosetag(err) {
+    return function(type) {
+      if (err) setStyle = &quot;error&quot;;
+      if (type == &quot;endTag&quot;) { popContext(); return cont(); }
+      setStyle = &quot;error&quot;;
+      return cont(arguments.callee);
+    };
+  }
+  function maybePopContext(nextTagName) {
+    var parentTagName;
+    while (true) {
+      if (!curState.context) {
+        return;
+      }
+      parentTagName = curState.context.tagName.toLowerCase();
+      if (!Kludges.contextGrabbers.hasOwnProperty(parentTagName) ||
+          !Kludges.contextGrabbers[parentTagName].hasOwnProperty(nextTagName)) {
+        return;
+      }
+      popContext();
+    }
+  }
+
+  function attributes(type) {
+    if (type == &quot;word&quot;) {setStyle = &quot;attribute&quot;; return cont(attribute, attributes);}
+    if (type == &quot;endTag&quot; || type == &quot;selfcloseTag&quot;) return pass();
+    setStyle = &quot;error&quot;;
+    return cont(attributes);
+  }
+  function attribute(type) {
+    if (type == &quot;equals&quot;) return cont(attvalue, attributes);
+    if (!Kludges.allowMissing) setStyle = &quot;error&quot;;
+    else if (type == &quot;word&quot;) {setStyle = &quot;attribute&quot;; return cont(attribute, attributes);}
+    return (type == &quot;endTag&quot; || type == &quot;selfcloseTag&quot;) ? pass() : cont();
+  }
+  function attvalue(type) {
+    if (type == &quot;string&quot;) return cont(attvaluemaybe);
+    if (type == &quot;word&quot; &amp;&amp; Kludges.allowUnquoted) {setStyle = &quot;string&quot;; return cont();}
+    setStyle = &quot;error&quot;;
+    return (type == &quot;endTag&quot; || type == &quot;selfCloseTag&quot;) ? pass() : cont();
+  }
+  function attvaluemaybe(type) {
+    if (type == &quot;string&quot;) return cont(attvaluemaybe);
+    else return pass();
+  }
+
+  return {
+    startState: function() {
+      return {tokenize: inText, cc: [], indented: 0, startOfLine: true, tagName: null, tagStart: null, context: null};
+    },
+
+    token: function(stream, state) {
+      if (!state.tagName &amp;&amp; stream.sol()) {
+        state.startOfLine = true;
+        state.indented = stream.indentation();
+      }
+      if (stream.eatSpace()) return null;
+
+      setStyle = type = tagName = null;
+      var style = state.tokenize(stream, state);
+      state.type = type;
+      if ((style || type) &amp;&amp; style != &quot;comment&quot;) {
+        curState = state; curStream = stream;
+        while (true) {
+          var comb = state.cc.pop() || element;
+          if (comb(type || style)) break;
+        }
+      }
+      state.startOfLine = false;
+      if (setStyle)
+        style = setStyle == &quot;error&quot; ? style + &quot; error&quot; : setStyle;
+      return style;
+    },
+
+    indent: function(state, textAfter, fullLine) {
+      var context = state.context;
+      // Indent multi-line strings (e.g. css).
+      if (state.tokenize.isInAttribute) {
+        return state.stringStartCol + 1;
+      }
+      if ((state.tokenize != inTag &amp;&amp; state.tokenize != inText) ||
+          context &amp;&amp; context.noIndent)
+        return fullLine ? fullLine.match(/^(\s*)/)[0].length : 0;
+      // Indent the starts of attribute names.
+      if (state.tagName) {
+        if (multilineTagIndentPastTag)
+          return state.tagStart + state.tagName.length + 2;
+        else
+          return state.tagStart + indentUnit * multilineTagIndentFactor;
+      }
+      if (alignCDATA &amp;&amp; /&lt;!\[CDATA\[/.test(textAfter)) return 0;
+      if (context &amp;&amp; /^&lt;\//.test(textAfter))
+        context = context.prev;
+      while (context &amp;&amp; !context.startOfLine)
+        context = context.prev;
+      if (context) return context.indent + indentUnit;
+      else return 0;
+    },
+
+    electricChars: &quot;/&quot;,
+    blockCommentStart: &quot;&lt;!--&quot;,
+    blockCommentEnd: &quot;--&gt;&quot;,
+
+    configuration: parserConfig.htmlMode ? &quot;html&quot; : &quot;xml&quot;,
+    helperType: parserConfig.htmlMode ? &quot;html&quot; : &quot;xml&quot;
+  };
+});
+
+CodeMirror.defineMIME(&quot;text/xml&quot;, &quot;xml&quot;);
+CodeMirror.defineMIME(&quot;application/xml&quot;, &quot;xml&quot;);
+if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
+  CodeMirror.defineMIME(&quot;text/html&quot;, {name: &quot;xml&quot;, htmlMode: true});
+</pre>
+</div>
+<div created="20140423185614170" description="Black Board" modified="20140423185747260" module-type="library" name="blackboard" tags="$:/tags/stylesheet" title="$:/plugins/tiddlywiki/codemirror/theme/blackboard.css" type="text/css">
+<pre>/* Port of TextMate's Blackboard theme */
+
+.cm-s-blackboard.CodeMirror { background: #0C1021; color: #F8F8F8; }
+.cm-s-blackboard .CodeMirror-selected { background: #253B76 !important; }
+.cm-s-blackboard .CodeMirror-gutters { background: #0C1021; border-right: 0; }
+.cm-s-blackboard .CodeMirror-linenumber { color: #888; }
+.cm-s-blackboard .CodeMirror-cursor { border-left: 1px solid #A7A7A7 !important; }
+
+.cm-s-blackboard .cm-keyword { color: #FBDE2D; }
+.cm-s-blackboard .cm-atom { color: #D8FA3C; }
+.cm-s-blackboard .cm-number { color: #D8FA3C; }
+.cm-s-blackboard .cm-def { color: #8DA6CE; }
+.cm-s-blackboard .cm-variable { color: #FF6400; }
+.cm-s-blackboard .cm-operator { color: #FBDE2D;}
+.cm-s-blackboard .cm-comment { color: #AEAEAE; }
+.cm-s-blackboard .cm-string { color: #61CE3C; }
+.cm-s-blackboard .cm-string-2 { color: #61CE3C; }
+.cm-s-blackboard .cm-meta { color: #D8FA3C; }
+.cm-s-blackboard .cm-builtin { color: #8DA6CE; }
+.cm-s-blackboard .cm-tag { color: #8DA6CE; }
+.cm-s-blackboard .cm-attribute { color: #8DA6CE; }
+.cm-s-blackboard .cm-header { color: #FF6400; }
+.cm-s-blackboard .cm-hr { color: #AEAEAE; }
+.cm-s-blackboard .cm-link { color: #8DA6CE; }
+.cm-s-blackboard .cm-error { background: #9D1E15; color: #F8F8F8; }
+
+.cm-s-blackboard .CodeMirror-activeline-background {background: #3C3636 !important;}
+.cm-s-blackboard .CodeMirror-matchingbracket {outline:1px solid grey;color:white !important}</pre>
+</div>
 <div created="20140423161546626" modified="20140423161556313" name="default" title="$:/plugins/tiddlywiki/codemirror/theme/default">
 <pre></pre>
 </div>
@@ -11617,7 +13737,7 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 .cm-s-erlang-dark .CodeMirror-matchingbracket {outline:1px solid grey; color:white !important;}
 </pre>
 </div>
-<div modified="20140423155028072" title="$:/ShowEditPreview">
+<div modified="20140423165312430" title="$:/ShowEditPreview">
 <pre>no</pre>
 </div>
 <div title="$:/SiteSubtitle">
@@ -11626,11 +13746,17 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div title="$:/SiteTitle">
 <pre>codemirrordemo</pre>
 </div>
-<div modified="20140423161844939" title="$:/state/sidebar">
+<div title="$:/state/modeDropdown-{-274957950}">
+<pre></pre>
+</div>
+<div modified="20140423164907178" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
-<div modified="20140423043237748" title="$:/state/tab-{-1370058198}">
-<pre>$:/core/ui/ControlPanel/Appearance</pre>
+<div modified="20140423175407683" title="$:/state/tab-{-1021635034}">
+<pre>$:/core/ui/TiddlerInfo/Fields</pre>
+</div>
+<div modified="20140423184720454" title="$:/state/tab-{-1370058198}">
+<pre>$:/core/ui/ControlPanel/Basics</pre>
 </div>
 <div modified="20140423043219100" title="$:/state/tab-{-1775082580}">
 <pre>$:/core/ui/ControlPanel/Appearance/StoryView</pre>
@@ -11638,7 +13764,7 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div modified="20140423043230044" title="$:/state/tab-{-1897492566}">
 <pre>$:/core/ui/ControlPanel/Advanced/LoadedModules</pre>
 </div>
-<div modified="20140423142919918" title="$:/state/tab-{-2015462294}">
+<div modified="20140423175852755" title="$:/state/tab-{-2015462294}">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
 <div modified="20140422191002569" title="$:/state/tab-{1001106335}">
@@ -11650,8 +13776,8 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div modified="20140422183129824" title="$:/state/tab-{701453456}">
 <pre>$:/core/ui/TiddlerInfo/Fields</pre>
 </div>
-<div modified="20140423141915210" title="$:/state/tab/sidebar-{-1763509675}">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div modified="20140423175529032" title="$:/state/tab/sidebar-{-1763509675}">
+<pre>$:/core/ui/SideBar/Open</pre>
 </div>
 <div title="$:/state/typeDropdown-{-274957950}">
 <pre></pre>
@@ -11668,13 +13794,13 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div title="$:/state/typeDropdown-{1725582378}">
 <pre></pre>
 </div>
-<div list="[[EditOthers 1]] HelloThere oldRefresh $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/plugins/tiddlywiki/codemirror/keymap/extra.js $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
+<div list="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js $:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js $:/plugins/tiddlywiki/codemirror/mode/php.js $:/AdvancedSearch $:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js EditOthersButtons codemirrorStyles $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20140422183000785" modified="20140423142917951" title="$:/temp/advancedsearch">
-<pre>codemirror</pre>
+<div created="20140422183000785" modified="20140423190430340" title="$:/temp/advancedsearch">
+<pre>codemirror/addon</pre>
 </div>
-<div created="20140422183133344" modified="20140423161553318" title="$:/temp/NewFieldName">
+<div created="20140422183133344" modified="20140423185724252" title="$:/temp/NewFieldName">
 <pre></pre>
 </div>
 <div created="20140422191025934" modified="20140422191057568" title="$:/temp/NewTagName">
@@ -11724,6 +13850,22 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
             &quot;text&quot;: &quot;fontfamily: `\&quot;Helvetica Neue\&quot;, Helvetica, Arial, \&quot;Lucida Grande\&quot;, sans-serif`\n&quot;
         }
     }
+}</pre>
+</div>
+<div created="20140423163450458" modified="20140423164158806" tags="$:/tags/stylesheet" title="codemirrorStyles">
+<pre>.codemirrorSelect {
+    display : inline-block;
+    background: grey;    
+}
+
+.codemirrorSelect a{
+    display : inline-block;
+    color: #fff;
+    text-decoration:none;
+}
+
+.codemirrorSelect a:hover{
+    text-decoration:none;
 }</pre>
 </div>
 <div created="20140423143610163" modified="20140423160214731" theme="erlang-dark" title="DynamicEditor">
@@ -11779,10 +13921,8 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 
 &lt;$edit-text tiddler= {{!!editable}}/&gt;</pre>
 </div>
-<div created="20140423160257293" editable="New Tiddler 3" modified="20140423161634969" theme="default" title="EditOthers 1">
-<pre>&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;
-&lt;$link to=&quot;&quot;&gt;theme&lt;/$link&gt;
-&lt;/$linkcatcher&gt;
+<div created="20140423160257293" editable="New Tiddler 3" mode="javascript" modified="20140423164403424" theme="erlang-dark" title="EditOthers 1">
+<pre>&lt;div class=&quot;codemirrorSelect&quot;&gt;&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;&lt;$link to=&quot;&quot;&gt;theme&lt;/$link&gt;&lt;/$linkcatcher&gt;&lt;/div&gt;
 &lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
 &lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
 &lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
@@ -11792,9 +13932,42 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 &lt;/$linkcatcher&gt;
 &lt;/div&gt;
 &lt;/$reveal&gt;
+&lt;div class=&quot;codemirrorSelect&quot;&gt;&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;&lt;$link to=&quot;&quot;&gt;mode&lt;/$link&gt;&lt;/$linkcatcher&gt;&lt;/div&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!mode&quot; set=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[all[shadows+tiddlers]prefix[$:/plugins/tiddlywiki/codemirror/mode/]] +[sort[description]]&quot;&gt;&lt;$link to={{!!name}}&gt;&lt;$view field=&quot;name&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
 &lt;/div&gt;
-
-&lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}}/&gt;</pre>
+&lt;/$reveal&gt;
+&lt;/div&gt;
+&lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}} mode={{!!mode}}/&gt;</pre>
+</div>
+<div created="20140423164406640" editable="New Tiddler 3" mode="javascript" modified="20140423190836688" theme="blackboard" title="EditOthersButtons">
+<pre>&lt;$button popup=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; &gt;theme&lt;/$button&gt;
+&lt;$button popup=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; &gt;mode&lt;/$button&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!theme&quot; set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[all[shadows+tiddlers]prefix[$:/plugins/tiddlywiki/codemirror/theme/]] +[sort[description]]&quot;&gt;&lt;$link to={{!!name}}&gt;&lt;$view field=&quot;name&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
+&lt;/div&gt;
+&lt;/$reveal&gt;&lt;/div&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!mode&quot; set=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[all[shadows+tiddlers]prefix[$:/plugins/tiddlywiki/codemirror/mode/]] +[sort[description]]&quot;&gt;&lt;$link to={{!!name}}&gt;&lt;$view field=&quot;name&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
+&lt;/div&gt;
+&lt;/$reveal&gt;
+&lt;/div&gt;
+&lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}} mode={{!!mode}}/&gt;</pre>
 </div>
 <div title="HelloThere">
 <pre>This is a demo of TiddlyWiki5 incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
@@ -11850,8 +14023,13 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 <div created="20140422215409644" modified="20140422215409644" title="New Tiddler 1">
 <pre>Newly created tiddler</pre>
 </div>
-<div created="20140422190218103" modified="20140423145648400" title="New Tiddler 3">
-<pre>var i;
+<div created="20140422190218103" modified="20140423191038061" title="New Tiddler 3">
+<pre>.cosa {
+	display:inline.
+	
+}
+
+var i;
 var x = function (param,param){
     if(param!=param){
     	return 4;
@@ -11859,6 +14037,11 @@ var x = function (param,param){
 }
 
 for(var i=0);
+
+.nabo{
+    display:block;
+}
+    &lt;bla&gt;&lt;h5&gt;
     </pre>
 </div>
 <div created="20140422191301855" modified="20140422200621236" title="New Tiddler 4">
