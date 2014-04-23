@@ -171,6 +171,8 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/codemirror/mode/vbscript.js</li>
 
+<li>$:/plugins/tiddlywiki/codemirror/theme/default</li>
+
 <li>$:/plugins/tiddlywiki/codemirror/theme/erlang-dark</li>
 
 <li>$:/ShowEditPreview</li>
@@ -197,9 +199,13 @@ Error message and password prompt
 
 <li>$:/state/tab/sidebar-{-1763509675}</li>
 
+<li>$:/state/typeDropdown-{-274957950}</li>
+
 <li>$:/state/typeDropdown-{-453216414}</li>
 
 <li>$:/state/typeDropdown-{-739627478}</li>
+
+<li>$:/state/typeDropdown-{1591571074}</li>
 
 <li>$:/state/typeDropdown-{1725582378}</li>
 
@@ -218,6 +224,12 @@ Error message and password prompt
 <li>$:/themes/tiddlywiki/vanilla</li>
 
 <li>DynamicEditor</li>
+
+<li>DynamicEditorWithInput</li>
+
+<li>EditOthers</li>
+
+<li>EditOthers 1</li>
 
 <li>HelloThere</li>
 
@@ -255,7 +267,7 @@ Error message and password prompt
 <div created="20140422181030979" modified="20140422224955905" title="$:/config/CodeMirror">
 <pre>$:/config/CodeMirror/javascript</pre>
 </div>
-<div created="20140422231249900" modified="20140422235141930" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
+<div created="20140422231249900" modified="20140423154502926" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
 <pre>mode: javascript
 theme: erlang-dark</pre>
 </div>
@@ -3599,7 +3611,7 @@ theme: erlang-dark</pre>
     }
 }</pre>
 </div>
-<div created="20140422224253998" modified="20140423150256293" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
+<div created="20140422224253998" modified="20140423161841921" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
 <pre>/*\
 title: $:/core/modules/widgets/edit-text-codemirror.js
 type: application/javascript
@@ -3652,14 +3664,23 @@ if($tw.browser) {
 	}
 }
     
+    EditTextWidget.prototype.executeOld = EditTextWidget.prototype.execute;
+    
+    EditTextWidget.prototype.execute = function(){
+        EditTextWidget.prototype.executeOld.call(this);
+        this.codemirrorMode = this.getAttribute(&quot;mode&quot;) || &quot;javascript&quot;;
+        this.theme = this.getAttribute(&quot;theme&quot;) || &quot;default&quot;;
+    };
+    
 EditTextWidget.prototype.getDynamicConfig = function(){
 	var configs=$tw.wiki.getTiddlerData(&quot;$:/config/CodeMirror/dynamic&quot;),conf;
+    EditTextWidget.configuration = EditTextWidget.configuration || {};
     if(configs){
         for (conf in configs) { EditTextWidget.configuration[conf] = configs[conf]; }
     }
     
-   /* EditTextWidget.configuration[&quot;mode&quot;]=this.codemirrorMode;
-    EditTextWidget.configuration[&quot;theme&quot;]=this.theme;*/
+   /* EditTextWidget.configuration[&quot;mode&quot;]=this.codemirrorMode;*/
+    EditTextWidget.configuration[&quot;theme&quot;]=this.theme;
     
 };
 
@@ -3706,7 +3727,7 @@ EditTextWidget.prototype.updateEditor = function(text) {
 <pre>[[HelloThere]]
 [list[$:/StoryList]]</pre>
 </div>
-<div current-tiddler="oldRefresh" modified="20140423150321418" title="$:/HistoryList" type="application/json">
+<div current-tiddler="$:/core/modules/widgets/edit-text-codemirror.js" modified="20140423161841923" title="$:/HistoryList" type="application/json">
 <pre>[
     {
         &quot;title&quot;: &quot;Draft of 'New Tiddler'&quot;
@@ -5744,6 +5765,193 @@ EditTextWidget.prototype.updateEditor = function(text) {
     },
     {
         &quot;title&quot;: &quot;oldRefresh&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;oldRefresh&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 284,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 68,
+            &quot;right&quot;: 845,
+            &quot;bottom&quot;: 300,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'vbs'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'vbs'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'vbs'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/panel'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/panel&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditorWithInput&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 284,
+            &quot;left&quot;: 777,
+            &quot;width&quot;: 93,
+            &quot;right&quot;: 870,
+            &quot;bottom&quot;: 300,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditor'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditor&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'DynamicEditorWithInput'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;DynamicEditorWithInput&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthers 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/theme/default&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthers 1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
     }
 ]</pre>
 </div>
@@ -11373,6 +11581,9 @@ CodeMirror.defineMode(&quot;vbscript&quot;, function(conf, parserConf) {
 
 CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 </div>
+<div created="20140423161546626" modified="20140423161556313" name="default" title="$:/plugins/tiddlywiki/codemirror/theme/default">
+<pre></pre>
+</div>
 <div created="20140422190837669" modified="20140423143410477" name="erlang-dark" tags="$:/tags/stylesheet" title="$:/plugins/tiddlywiki/codemirror/theme/erlang-dark">
 <pre>.cm-s-erlang-dark.CodeMirror { background: #002240; color: white; }
 .cm-s-erlang-dark div.CodeMirror-selected { background: #b36539 !important; }
@@ -11406,7 +11617,7 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 .cm-s-erlang-dark .CodeMirror-matchingbracket {outline:1px solid grey; color:white !important;}
 </pre>
 </div>
-<div modified="20140423145511668" title="$:/ShowEditPreview">
+<div modified="20140423155028072" title="$:/ShowEditPreview">
 <pre>no</pre>
 </div>
 <div title="$:/SiteSubtitle">
@@ -11415,7 +11626,7 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div title="$:/SiteTitle">
 <pre>codemirrordemo</pre>
 </div>
-<div modified="20140423150324495" title="$:/state/sidebar">
+<div modified="20140423161844939" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div modified="20140423043237748" title="$:/state/tab-{-1370058198}">
@@ -11442,22 +11653,28 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 <div modified="20140423141915210" title="$:/state/tab/sidebar-{-1763509675}">
 <pre>$:/core/ui/SideBar/Recent</pre>
 </div>
+<div title="$:/state/typeDropdown-{-274957950}">
+<pre></pre>
+</div>
 <div title="$:/state/typeDropdown-{-453216414}">
 <pre></pre>
 </div>
 <div title="$:/state/typeDropdown-{-739627478}">
 <pre></pre>
 </div>
+<div title="$:/state/typeDropdown-{1591571074}">
+<pre></pre>
+</div>
 <div title="$:/state/typeDropdown-{1725582378}">
 <pre></pre>
 </div>
-<div list="HelloThere oldRefresh DynamicEditor $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/plugins/tiddlywiki/codemirror/keymap/extra.js $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
+<div list="[[EditOthers 1]] HelloThere oldRefresh $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/plugins/tiddlywiki/codemirror/keymap/extra.js $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20140422183000785" modified="20140423142917951" title="$:/temp/advancedsearch">
 <pre>codemirror</pre>
 </div>
-<div created="20140422183133344" modified="20140423144103020" title="$:/temp/NewFieldName">
+<div created="20140422183133344" modified="20140423161553318" title="$:/temp/NewFieldName">
 <pre></pre>
 </div>
 <div created="20140422191025934" modified="20140422191057568" title="$:/temp/NewTagName">
@@ -11509,10 +11726,27 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
     }
 }</pre>
 </div>
-<div created="20140423143610163" mode="erlang-dark" modified="20140423145756913" theme="erlang-dark" title="DynamicEditor">
+<div created="20140423143610163" modified="20140423160214731" theme="erlang-dark" title="DynamicEditor">
 <pre>&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;
 &lt;$link to=&quot;&quot;&gt;{{!!theme}}&lt;/$link&gt;
 &lt;/$linkcatcher&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!theme&quot; set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[all[shadows+tiddlers]prefix[$:/plugins/tiddlywiki/codemirror/theme/]] +[sort[description]]&quot;&gt;&lt;$link to={{!!name}}&gt;&lt;$view field=&quot;description&quot;/&gt; &lt;$view field=&quot;name&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
+&lt;/div&gt;
+&lt;/$reveal&gt;
+&lt;/div&gt;
+
+&lt;$edit-text tiddler=&quot;New Tiddler 3&quot;/&gt;
+
+</pre>
+</div>
+<div created="20140423154824170" mode="erlang-dark" modified="20140423155031296" theme="erlang-dark" title="DynamicEditorWithInput">
+<pre>* Mode &lt;$edit-text tiddler=&quot;$:/config/CodeMirror/dynamic&quot; index=&quot;mode&quot; tag=&quot;input&quot; popup=&quot;&quot;/&gt;
 &lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
 &lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
 &lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
@@ -11527,6 +11761,40 @@ CodeMirror.defineMIME(&quot;text/vbscript&quot;, &quot;vbscript&quot;);</pre>
 &lt;$edit-text tiddler=&quot;New Tiddler 3&quot;/&gt;
 
 </pre>
+</div>
+<div created="20140423155034968" editable="DynamicEditorWithInput" modified="20140423160314520" title="EditOthers">
+<pre>&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;
+&lt;$link to=&quot;&quot;&gt;edit&lt;/$link&gt;
+&lt;/$linkcatcher&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!editable&quot; set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[list[$:/StoryList]]&quot;&gt;&lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
+&lt;/div&gt;
+&lt;/$reveal&gt;
+&lt;/div&gt;
+
+&lt;$edit-text tiddler= {{!!editable}}/&gt;</pre>
+</div>
+<div created="20140423160257293" editable="New Tiddler 3" modified="20140423161634969" theme="default" title="EditOthers 1">
+<pre>&lt;$linkcatcher set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;yes&quot;&gt;
+&lt;$link to=&quot;&quot;&gt;theme&lt;/$link&gt;
+&lt;/$linkcatcher&gt;
+&lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
+&lt;$reveal state=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; type=&quot;nomatch&quot; text=&quot;&quot; default=&quot;&quot;&gt;
+&lt;div class=&quot;tw-block-dropdown tw-edit-type-dropdown&quot;&gt;
+&lt;$linkcatcher to=&quot;!!theme&quot; set=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; setTo=&quot;&quot;&gt;
+&lt;$list filter=&quot;[all[shadows+tiddlers]prefix[$:/plugins/tiddlywiki/codemirror/theme/]] +[sort[description]]&quot;&gt;&lt;$link to={{!!name}}&gt;&lt;$view field=&quot;name&quot;/&gt;&lt;/$link&gt;
+&lt;/$list&gt;
+&lt;/$linkcatcher&gt;
+&lt;/div&gt;
+&lt;/$reveal&gt;
+&lt;/div&gt;
+
+&lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}}/&gt;</pre>
 </div>
 <div title="HelloThere">
 <pre>This is a demo of TiddlyWiki5 incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
