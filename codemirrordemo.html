@@ -287,8 +287,8 @@ Error message and password prompt
 <div created="20140422181030979" modified="20140422224955905" title="$:/config/CodeMirror">
 <pre>$:/config/CodeMirror/javascript</pre>
 </div>
-<div created="20140422231249900" modified="20140423154502926" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
-<pre>mode: javascript
+<div created="20140422231249900" modified="20140423195716466" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
+<pre>mode: vbscript
 theme: erlang-dark</pre>
 </div>
 <div created="20140422224836133" modified="20140423191321249" title="$:/config/CodeMirror/javascript" type="application/json">
@@ -3637,7 +3637,7 @@ theme: erlang-dark</pre>
     }
 }</pre>
 </div>
-<div created="20140422224253998" modified="20140423162418767" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
+<div created="20140422224253998" modified="20140423201656060" module-type="widget" title="$:/core/modules/widgets/edit-text-codemirror.js" type="application/javascript">
 <pre>/*\
 title: $:/core/modules/widgets/edit-text-codemirror.js
 type: application/javascript
@@ -3694,8 +3694,9 @@ if($tw.browser) {
     
     EditTextWidget.prototype.execute = function(){
         EditTextWidget.prototype.executeOld.call(this);
-        this.codemirrorMode = this.getAttribute(&quot;mode&quot;) || &quot;javascript&quot;;
-        this.theme = this.getAttribute(&quot;theme&quot;) || &quot;default&quot;;
+        var defaults=$tw.wiki.getTiddlerData(&quot;$:/config/CodeMirror/dynamic&quot;);
+        this.codemirrorMode = this.getAttribute(&quot;mode&quot;) || defaults.mode;
+        this.theme = this.getAttribute(&quot;theme&quot;) || defaults.theme;
     };
     
 EditTextWidget.prototype.getDynamicConfig = function(){
@@ -3753,7 +3754,7 @@ EditTextWidget.prototype.updateEditor = function(text) {
 <pre>[[$:/config/CodeMirror/javascript]]
 [list[$:/StoryList]]</pre>
 </div>
-<div current-tiddler="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js" modified="20140423191349752" title="$:/HistoryList" type="application/json">
+<div current-tiddler="$:/core/modules/widgets/edit-text-codemirror.js" modified="20140423201656063" title="$:/HistoryList" type="application/json">
 <pre>[
     {
         &quot;title&quot;: &quot;Draft of 'New Tiddler'&quot;
@@ -6749,6 +6750,157 @@ EditTextWidget.prototype.updateEditor = function(text) {
     },
     {
         &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 379,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 395,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/dynamic'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/dynamic&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 356,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 379,
+            &quot;right&quot;: 1161,
+            &quot;bottom&quot;: 372,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 517,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 198,
+            &quot;right&quot;: 980,
+            &quot;bottom&quot;: 533,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 471,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 22,
+            &quot;right&quot;: 804,
+            &quot;bottom&quot;: 487,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'vbs'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'vbs'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;vbs&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 379,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 116,
+            &quot;right&quot;: 898,
+            &quot;bottom&quot;: 395,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'EditOthersButtons'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 189,
+            &quot;left&quot;: 932,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 946,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 17
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 291.890625,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 300,
+            &quot;right&quot;: 385,
+            &quot;bottom&quot;: 307.890625,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 448,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 300,
+            &quot;right&quot;: 1082,
+            &quot;bottom&quot;: 464,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/modules/widgets/edit-text-codemirror.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
     }
 ]</pre>
 </div>
@@ -13737,7 +13889,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 .cm-s-erlang-dark .CodeMirror-matchingbracket {outline:1px solid grey; color:white !important;}
 </pre>
 </div>
-<div modified="20140423165312430" title="$:/ShowEditPreview">
+<div modified="20140423195840463" title="$:/ShowEditPreview">
 <pre>no</pre>
 </div>
 <div title="$:/SiteSubtitle">
@@ -13749,7 +13901,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div title="$:/state/modeDropdown-{-274957950}">
 <pre></pre>
 </div>
-<div modified="20140423164907178" title="$:/state/sidebar">
+<div modified="20140423201501160" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div modified="20140423175407683" title="$:/state/tab-{-1021635034}">
@@ -13764,8 +13916,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div modified="20140423043230044" title="$:/state/tab-{-1897492566}">
 <pre>$:/core/ui/ControlPanel/Advanced/LoadedModules</pre>
 </div>
-<div modified="20140423175852755" title="$:/state/tab-{-2015462294}">
-<pre>$:/core/ui/AdvancedSearch/System</pre>
+<div modified="20140423200018774" title="$:/state/tab-{-2015462294}">
+<pre>$:/core/ui/AdvancedSearch/Shadows</pre>
 </div>
 <div modified="20140422191002569" title="$:/state/tab-{1001106335}">
 <pre>$:/core/ui/TiddlerInfo/Fields</pre>
@@ -13797,8 +13949,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div list="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js $:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js $:/plugins/tiddlywiki/codemirror/mode/php.js $:/AdvancedSearch $:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js EditOthersButtons codemirrorStyles $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20140422183000785" modified="20140423190430340" title="$:/temp/advancedsearch">
-<pre>codemirror/addon</pre>
+<div created="20140422183000785" modified="20140423200016618" title="$:/temp/advancedsearch">
+<pre>codemirror</pre>
 </div>
 <div created="20140422183133344" modified="20140423185724252" title="$:/temp/NewFieldName">
 <pre></pre>
@@ -13945,7 +14097,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 &lt;/div&gt;
 &lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}} mode={{!!mode}}/&gt;</pre>
 </div>
-<div created="20140423164406640" editable="New Tiddler 3" mode="javascript" modified="20140423190836688" theme="blackboard" title="EditOthersButtons">
+<div created="20140423164406640" editable="New Tiddler 3" mode="vbscript" modified="20140423195848306" theme="default" title="EditOthersButtons">
 <pre>&lt;$button popup=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; &gt;theme&lt;/$button&gt;
 &lt;$button popup=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; &gt;mode&lt;/$button&gt;
 &lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
@@ -13967,6 +14119,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 &lt;/div&gt;
 &lt;/$reveal&gt;
 &lt;/div&gt;
+
 &lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}} mode={{!!mode}}/&gt;</pre>
 </div>
 <div title="HelloThere">
@@ -14023,26 +14176,14 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 <div created="20140422215409644" modified="20140422215409644" title="New Tiddler 1">
 <pre>Newly created tiddler</pre>
 </div>
-<div created="20140422190218103" modified="20140423191038061" title="New Tiddler 3">
-<pre>.cosa {
-	display:inline.
-	
-}
+<div created="20140422190218103" modified="20140423195758634" title="New Tiddler 3">
+<pre>' Pete Guhl ' 03-04-2012 ' ' Basic VBScript support for codemirror2
 
-var i;
-var x = function (param,param){
-    if(param!=param){
-    	return 4;
-    }
-}
+Const ForReading = 1, ForWriting = 2, ForAppending = 8
 
-for(var i=0);
+Call Sub020_PostBroadcastToUrbanAirship(strUserName, strPassword, intTransmitID, strResponse)
 
-.nabo{
-    display:block;
-}
-    &lt;bla&gt;&lt;h5&gt;
-    </pre>
+If Not IsNull(strResponse) AND Len(strResponse) = 0 Then boolTransmitOkYN = False Else ' WScript.Echo &quot;Oh Happy Day! Oh Happy DAY!&quot; boolTransmitOkYN = True End If</pre>
 </div>
 <div created="20140422191301855" modified="20140422200621236" title="New Tiddler 4">
 <pre>var i = 8;
