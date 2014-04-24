@@ -161,6 +161,12 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js</li>
 
+<li>$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js</li>
+
+<li>$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js</li>
+
+<li>$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js</li>
+
 <li>$:/plugins/tiddlywiki/codemirror/instructions</li>
 
 <li>$:/plugins/tiddlywiki/codemirror/keymap/extra.js</li>
@@ -287,11 +293,12 @@ Error message and password prompt
 <div created="20140422181030979" modified="20140422224955905" title="$:/config/CodeMirror">
 <pre>$:/config/CodeMirror/javascript</pre>
 </div>
-<div created="20140422231249900" modified="20140423195716466" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
+<div created="20140422231249900" modified="20140423210749321" title="$:/config/CodeMirror/dynamic" type="application/x-tiddler-dictionary">
 <pre>mode: vbscript
-theme: erlang-dark</pre>
+theme: erlang-dark
+indentUnit: 4</pre>
 </div>
-<div created="20140422224836133" modified="20140423191321249" title="$:/config/CodeMirror/javascript" type="application/json">
+<div created="20140422224836133" modified="20140423221233016" title="$:/config/CodeMirror/javascript" type="application/json">
 <pre>{
   &quot;require&quot;: [
       &quot;$:/plugins/tiddlywiki/codemirror/addon/dialog.js&quot;,
@@ -312,25 +319,31 @@ theme: erlang-dark</pre>
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.js&quot;,
  	  &quot;$:/plugins/tiddlywiki/codemirror/addon/fold/foldcode.js&quot;,
       &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;,
-      &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js&quot;
+      &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js&quot;,
+&quot;$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js&quot;,
+&quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;,
+&quot;$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js&quot;
+
   ],
   &quot;configuration&quot;: {
-      &quot;theme&quot;: &quot;erlang-dark&quot;,
-      &quot;mode&quot;:&quot;javascript&quot;,
-      &quot;showCursorWhenSelecting&quot;: true,
-      &quot;indentUnit&quot;:4,
-      &quot;lineWrapping&quot;:false,
-      &quot;autoCloseBrackets&quot; : true,
-       &quot;autoCloseTags&quot; : true,
-      &quot;foldGutter&quot;: true,
-      &quot;matchBrackets&quot;:true,
-      &quot;gutters&quot;: [&quot;CodeMirror-linenumbers&quot;, &quot;CodeMirror-foldgutter&quot;]
+	&quot;theme&quot;: &quot;erlang-dark&quot;,
+	&quot;mode&quot;:&quot;javascript&quot;,
+	&quot;showCursorWhenSelecting&quot;: true,
+	&quot;indentUnit&quot;:4,
+	&quot;lineWrapping&quot;:false,
+	&quot;autoCloseBrackets&quot; : true,
+	&quot;autoCloseTags&quot; : true,
+	&quot;foldGutter&quot;: true,
+	&quot;matchBrackets&quot;:true,
+	&quot;styleActiveLine&quot; : true,
+	&quot;gutters&quot;: [&quot;CodeMirror-linenumbers&quot;, &quot;CodeMirror-foldgutter&quot;]
   }
 }</pre>
 </div>
-<div created="20140422231445640" modified="20140422233643014" title="$:/config/CodeMirror/panel">
+<div created="20140422231445640" modified="20140423210533377" title="$:/config/CodeMirror/panel">
 <pre>* Mode &lt;$edit-text tiddler=&quot;$:/config/CodeMirror/dynamic&quot; index=&quot;mode&quot; tag=&quot;input&quot;/&gt;
-* theme &lt;$edit-text tiddler=&quot;$:/config/CodeMirror/dynamic&quot; index=&quot;theme&quot; tag=&quot;input&quot;/&gt;</pre>
+* theme &lt;$edit-text tiddler=&quot;$:/config/CodeMirror/dynamic&quot; index=&quot;theme&quot; tag=&quot;input&quot;/&gt;
+* indentUnit &lt;$edit-text default=&quot;4&quot; tiddler=&quot;$:/config/CodeMirror/dynamic&quot; index=&quot;indentUnit&quot; tag=&quot;input&quot;/&gt;</pre>
 </div>
 <div created="20140422225342618" modified="20140423142823797" title="$:/config/CodeMirror/theme">
 <pre>erlang-dark</pre>
@@ -3754,7 +3767,7 @@ EditTextWidget.prototype.updateEditor = function(text) {
 <pre>[[$:/config/CodeMirror/javascript]]
 [list[$:/StoryList]]</pre>
 </div>
-<div current-tiddler="$:/core/modules/widgets/edit-text-codemirror.js" modified="20140423201656063" title="$:/HistoryList" type="application/json">
+<div current-tiddler="$:/config/CodeMirror/javascript" modified="20140423221233024" title="$:/HistoryList" type="application/json">
 <pre>[
     {
         &quot;title&quot;: &quot;Draft of 'New Tiddler'&quot;
@@ -6901,6 +6914,357 @@ EditTextWidget.prototype.updateEditor = function(text) {
     },
     {
         &quot;title&quot;: &quot;$:/core/modules/widgets/edit-text-codemirror.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;EditOthersButtons&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 379,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 115,
+            &quot;right&quot;: 897,
+            &quot;bottom&quot;: 395,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/panel'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/panel&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/dynamic'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/dynamic&quot;
+    },
+    {
+        &quot;title&quot;: &quot;New Tiddler 2&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/panel&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 425,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 168,
+            &quot;right&quot;: 950,
+            &quot;bottom&quot;: 441,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 264,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 142,
+            &quot;right&quot;: 924,
+            &quot;bottom&quot;: 280,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 190,
+            &quot;left&quot;: 935,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 949,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 514,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 368,
+            &quot;right&quot;: 453,
+            &quot;bottom&quot;: 530,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 190,
+            &quot;left&quot;: 935,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 949,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 232,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 193,
+            &quot;right&quot;: 278,
+            &quot;bottom&quot;: 248,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 310,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 193,
+            &quot;right&quot;: 975,
+            &quot;bottom&quot;: 326,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 297,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 368,
+            &quot;right&quot;: 453,
+            &quot;bottom&quot;: 313,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 333,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 250,
+            &quot;right&quot;: 1032,
+            &quot;bottom&quot;: 349,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 5'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 333,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 193,
+            &quot;right&quot;: 975,
+            &quot;bottom&quot;: 349,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/AdvancedSearch&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 190,
+            &quot;left&quot;: 935,
+            &quot;width&quot;: 14,
+            &quot;right&quot;: 949,
+            &quot;bottom&quot;: 206,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 332,
+            &quot;left&quot;: 85,
+            &quot;width&quot;: 294,
+            &quot;right&quot;: 379,
+            &quot;bottom&quot;: 348,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/keymap/extra.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 333,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 294,
+            &quot;right&quot;: 1076,
+            &quot;bottom&quot;: 349,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/keymap/extra.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'New Tiddler 2'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/keymap/extra.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js 1'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 264,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 341,
+            &quot;right&quot;: 1123,
+            &quot;bottom&quot;: 280,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 287,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 362,
+            &quot;right&quot;: 1144,
+            &quot;bottom&quot;: 303,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/tiddlywiki/codemirror/keymap/extra.js'&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 333,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 351,
+            &quot;right&quot;: 1133,
+            &quot;bottom&quot;: 349,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/extra.js&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 356,
+            &quot;left&quot;: 782,
+            &quot;width&quot;: 193,
+            &quot;right&quot;: 975,
+            &quot;bottom&quot;: 372,
+            &quot;height&quot;: 16
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/CodeMirror/javascript'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/CodeMirror/javascript&quot;
     }
 ]</pre>
 </div>
@@ -7778,6 +8142,373 @@ CodeMirror.includeRangeFinder = CodeMirror.fold.include; // deprecated
 })();
 </pre>
 </div>
+<div created="20140423215156776" modified="20140423220606542" module-type="library" title="$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js" type="application/javascript">
+<pre>(function() {
+  &quot;use strict&quot;;
+
+  var WORD = /[\w$]+/, RANGE = 500;
+
+  CodeMirror.registerHelper(&quot;hint&quot;, &quot;anyword&quot;, function(editor, options) {
+    var word = options &amp;&amp; options.word || WORD;
+    var range = options &amp;&amp; options.range || RANGE;
+    var cur = editor.getCursor(), curLine = editor.getLine(cur.line);
+    var start = cur.ch, end = start;
+    while (end &lt; curLine.length &amp;&amp; word.test(curLine.charAt(end))) ++end;
+    while (start &amp;&amp; word.test(curLine.charAt(start - 1))) --start;
+    var curWord = start != end &amp;&amp; curLine.slice(start, end);
+
+    var list = [], seen = {};
+    function scan(dir) {
+      var line = cur.line, end = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
+      for (; line != end; line += dir) {
+        var text = editor.getLine(line), m;
+        var re = new RegExp(word.source, &quot;g&quot;);
+        while (m = re.exec(text)) {
+          if (line == cur.line &amp;&amp; m[0] === curWord) continue;
+          if ((!curWord || m[0].indexOf(curWord) == 0) &amp;&amp; !seen.hasOwnProperty(m[0])) {
+            seen[m[0]] = true;
+            list.push(m[0]);
+          }
+        }
+      }
+    }
+    scan(-1);
+    scan(1);
+    return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
+  });
+})(); </pre>
+</div>
+<div created="20140423221021406" modified="20140423221046016" module-type="library" title="$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js" type="application/javascript">
+<pre>(function() {
+  &quot;use strict&quot;;
+
+  var HINT_ELEMENT_CLASS        = &quot;CodeMirror-hint&quot;;
+  var ACTIVE_HINT_ELEMENT_CLASS = &quot;CodeMirror-hint-active&quot;;
+
+  CodeMirror.showHint = function(cm, getHints, options) {
+    // We want a single cursor position.
+    if (cm.somethingSelected()) return;
+    if (getHints == null) getHints = cm.getHelper(cm.getCursor(), &quot;hint&quot;);
+    if (getHints == null) return;
+
+    if (cm.state.completionActive) cm.state.completionActive.close();
+
+    var completion = cm.state.completionActive = new Completion(cm, getHints, options || {});
+    CodeMirror.signal(cm, &quot;startCompletion&quot;, cm);
+    if (completion.options.async)
+      getHints(cm, function(hints) { completion.showHints(hints); }, completion.options);
+    else
+      return completion.showHints(getHints(cm, completion.options));
+  };
+
+  function Completion(cm, getHints, options) {
+    this.cm = cm;
+    this.getHints = getHints;
+    this.options = options;
+    this.widget = this.onClose = null;
+  }
+
+  Completion.prototype = {
+    close: function() {
+      if (!this.active()) return;
+      this.cm.state.completionActive = null;
+
+      if (this.widget) this.widget.close();
+      if (this.onClose) this.onClose();
+      CodeMirror.signal(this.cm, &quot;endCompletion&quot;, this.cm);
+    },
+
+    active: function() {
+      return this.cm.state.completionActive == this;
+    },
+
+    pick: function(data, i) {
+      var completion = data.list[i];
+      if (completion.hint) completion.hint(this.cm, data, completion);
+      else this.cm.replaceRange(getText(completion), data.from, data.to);
+      this.close();
+    },
+
+    showHints: function(data) {
+      if (!data || !data.list.length || !this.active()) return this.close();
+
+      if (this.options.completeSingle != false &amp;&amp; data.list.length == 1)
+        this.pick(data, 0);
+      else
+        this.showWidget(data);
+    },
+
+    showWidget: function(data) {
+      this.widget = new Widget(this, data);
+      CodeMirror.signal(data, &quot;shown&quot;);
+
+      var debounce = null, completion = this, finished;
+      var closeOn = this.options.closeCharacters || /[\s()\[\]{};:&gt;,]/;
+      var startPos = this.cm.getCursor(), startLen = this.cm.getLine(startPos.line).length;
+
+      function done() {
+        if (finished) return;
+        finished = true;
+        completion.close();
+        completion.cm.off(&quot;cursorActivity&quot;, activity);
+        if (data) CodeMirror.signal(data, &quot;close&quot;);
+      }
+
+      function update() {
+        if (finished) return;
+        CodeMirror.signal(data, &quot;update&quot;);
+        if (completion.options.async)
+          completion.getHints(completion.cm, finishUpdate, completion.options);
+        else
+          finishUpdate(completion.getHints(completion.cm, completion.options));
+      }
+      function finishUpdate(data_) {
+        data = data_;
+        if (finished) return;
+        if (!data || !data.list.length) return done();
+        completion.widget = new Widget(completion, data);
+      }
+
+      function activity() {
+        clearTimeout(debounce);
+        var pos = completion.cm.getCursor(), line = completion.cm.getLine(pos.line);
+        if (pos.line != startPos.line || line.length - pos.ch != startLen - startPos.ch ||
+            pos.ch &lt; startPos.ch || completion.cm.somethingSelected() ||
+            (pos.ch &amp;&amp; closeOn.test(line.charAt(pos.ch - 1)))) {
+          completion.close();
+        } else {
+          debounce = setTimeout(update, 170);
+          if (completion.widget) completion.widget.close();
+        }
+      }
+      this.cm.on(&quot;cursorActivity&quot;, activity);
+      this.onClose = done;
+    }
+  };
+
+  function getText(completion) {
+    if (typeof completion == &quot;string&quot;) return completion;
+    else return completion.text;
+  }
+
+  function buildKeyMap(options, handle) {
+    var baseMap = {
+      Up: function() {handle.moveFocus(-1);},
+      Down: function() {handle.moveFocus(1);},
+      PageUp: function() {handle.moveFocus(-handle.menuSize() + 1, true);},
+      PageDown: function() {handle.moveFocus(handle.menuSize() - 1, true);},
+      Home: function() {handle.setFocus(0);},
+      End: function() {handle.setFocus(handle.length - 1);},
+      Enter: handle.pick,
+      Tab: handle.pick,
+      Esc: handle.close
+    };
+    var ourMap = options.customKeys ? {} : baseMap;
+    function addBinding(key, val) {
+      var bound;
+      if (typeof val != &quot;string&quot;)
+        bound = function(cm) { return val(cm, handle); };
+      // This mechanism is deprecated
+      else if (baseMap.hasOwnProperty(val))
+        bound = baseMap[val];
+      else
+        bound = val;
+      ourMap[key] = bound;
+    }
+    if (options.customKeys)
+      for (var key in options.customKeys) if (options.customKeys.hasOwnProperty(key))
+        addBinding(key, options.customKeys[key]);
+    if (options.extraKeys)
+      for (var key in options.extraKeys) if (options.extraKeys.hasOwnProperty(key))
+        addBinding(key, options.extraKeys[key]);
+    return ourMap;
+  }
+
+  function getHintElement(stopAt, el) {
+    while (el &amp;&amp; el != stopAt) {
+      if (el.nodeName.toUpperCase() === &quot;LI&quot;) return el;
+      el = el.parentNode;
+    }
+  }
+
+  function Widget(completion, data) {
+    this.completion = completion;
+    this.data = data;
+    var widget = this, cm = completion.cm, options = completion.options;
+
+    var hints = this.hints = document.createElement(&quot;ul&quot;);
+    hints.className = &quot;CodeMirror-hints&quot;;
+    this.selectedHint = options.getDefaultSelection ? options.getDefaultSelection(cm,options,data) : 0;
+
+    var completions = data.list;
+    for (var i = 0; i &lt; completions.length; ++i) {
+      var elt = hints.appendChild(document.createElement(&quot;li&quot;)), cur = completions[i];
+      var className = HINT_ELEMENT_CLASS + (i != this.selectedHint ? &quot;&quot; : &quot; &quot; + ACTIVE_HINT_ELEMENT_CLASS);
+      if (cur.className != null) className = cur.className + &quot; &quot; + className;
+      elt.className = className;
+      if (cur.render) cur.render(elt, data, cur);
+      else elt.appendChild(document.createTextNode(cur.displayText || getText(cur)));
+      elt.hintId = i;
+    }
+
+    var pos = cm.cursorCoords(options.alignWithWord !== false ? data.from : null);
+    var left = pos.left, top = pos.bottom, below = true;
+    hints.style.left = left + &quot;px&quot;;
+    hints.style.top = top + &quot;px&quot;;
+    // If we're at the edge of the screen, then we want the menu to appear on the left of the cursor.
+    var winW = window.innerWidth || Math.max(document.body.offsetWidth, document.documentElement.offsetWidth);
+    var winH = window.innerHeight || Math.max(document.body.offsetHeight, document.documentElement.offsetHeight);
+    (options.container || document.body).appendChild(hints);
+    var box = hints.getBoundingClientRect();
+    var overlapX = box.right - winW, overlapY = box.bottom - winH;
+    if (overlapX &gt; 0) {
+      if (box.right - box.left &gt; winW) {
+        hints.style.width = (winW - 5) + &quot;px&quot;;
+        overlapX -= (box.right - box.left) - winW;
+      }
+      hints.style.left = (left = pos.left - overlapX) + &quot;px&quot;;
+    }
+    if (overlapY &gt; 0) {
+      var height = box.bottom - box.top;
+      if (box.top - (pos.bottom - pos.top) - height &gt; 0) {
+        overlapY = height + (pos.bottom - pos.top);
+        below = false;
+      } else if (height &gt; winH) {
+        hints.style.height = (winH - 5) + &quot;px&quot;;
+        overlapY -= height - winH;
+      }
+      hints.style.top = (top = pos.bottom - overlapY) + &quot;px&quot;;
+    }
+
+    cm.addKeyMap(this.keyMap = buildKeyMap(options, {
+      moveFocus: function(n, avoidWrap) { widget.changeActive(widget.selectedHint + n, avoidWrap); },
+      setFocus: function(n) { widget.changeActive(n); },
+      menuSize: function() { return widget.screenAmount(); },
+      length: completions.length,
+      close: function() { completion.close(); },
+      pick: function() { widget.pick(); }
+    }));
+
+    if (options.closeOnUnfocus !== false) {
+      var closingOnBlur;
+      cm.on(&quot;blur&quot;, this.onBlur = function() { closingOnBlur = setTimeout(function() { completion.close(); }, 100); });
+      cm.on(&quot;focus&quot;, this.onFocus = function() { clearTimeout(closingOnBlur); });
+    }
+
+    var startScroll = cm.getScrollInfo();
+    cm.on(&quot;scroll&quot;, this.onScroll = function() {
+      var curScroll = cm.getScrollInfo(), editor = cm.getWrapperElement().getBoundingClientRect();
+      var newTop = top + startScroll.top - curScroll.top;
+      var point = newTop - (window.pageYOffset || (document.documentElement || document.body).scrollTop);
+      if (!below) point += hints.offsetHeight;
+      if (point &lt;= editor.top || point &gt;= editor.bottom) return completion.close();
+      hints.style.top = newTop + &quot;px&quot;;
+      hints.style.left = (left + startScroll.left - curScroll.left) + &quot;px&quot;;
+    });
+
+    CodeMirror.on(hints, &quot;dblclick&quot;, function(e) {
+      var t = getHintElement(hints, e.target || e.srcElement);
+      if (t &amp;&amp; t.hintId != null) {widget.changeActive(t.hintId); widget.pick();}
+    });
+
+    CodeMirror.on(hints, &quot;click&quot;, function(e) {
+      var t = getHintElement(hints, e.target || e.srcElement);
+      if (t &amp;&amp; t.hintId != null) widget.changeActive(t.hintId);
+    });
+
+    CodeMirror.on(hints, &quot;mousedown&quot;, function() {
+      setTimeout(function(){cm.focus();}, 20);
+    });
+
+    CodeMirror.signal(data, &quot;select&quot;, completions[0], hints.firstChild);
+    return true;
+  }
+
+  Widget.prototype = {
+    close: function() {
+      if (this.completion.widget != this) return;
+      this.completion.widget = null;
+      this.hints.parentNode.removeChild(this.hints);
+      this.completion.cm.removeKeyMap(this.keyMap);
+
+      var cm = this.completion.cm;
+      if (this.completion.options.closeOnUnfocus !== false) {
+        cm.off(&quot;blur&quot;, this.onBlur);
+        cm.off(&quot;focus&quot;, this.onFocus);
+      }
+      cm.off(&quot;scroll&quot;, this.onScroll);
+    },
+
+    pick: function() {
+      this.completion.pick(this.data, this.selectedHint);
+    },
+
+    changeActive: function(i, avoidWrap) {
+      if (i &gt;= this.data.list.length)
+        i = avoidWrap ? this.data.list.length - 1 : 0;
+      else if (i &lt; 0)
+        i = avoidWrap ? 0  : this.data.list.length - 1;
+      if (this.selectedHint == i) return;
+      var node = this.hints.childNodes[this.selectedHint];
+      node.className = node.className.replace(&quot; &quot; + ACTIVE_HINT_ELEMENT_CLASS, &quot;&quot;);
+      node = this.hints.childNodes[this.selectedHint = i];
+      node.className += &quot; &quot; + ACTIVE_HINT_ELEMENT_CLASS;
+      if (node.offsetTop &lt; this.hints.scrollTop)
+        this.hints.scrollTop = node.offsetTop - 3;
+      else if (node.offsetTop + node.offsetHeight &gt; this.hints.scrollTop + this.hints.clientHeight)
+        this.hints.scrollTop = node.offsetTop + node.offsetHeight - this.hints.clientHeight + 3;
+      CodeMirror.signal(this.data, &quot;select&quot;, this.data.list[this.selectedHint], node);
+    },
+
+    screenAmount: function() {
+      return Math.floor(this.hints.clientHeight / this.hints.firstChild.offsetHeight) || 1;
+    }
+  };
+})();
+</pre>
+</div>
+<div created="20140423214023658" modified="20140423214058197" module-type="library" title="$:/plugins/tiddlywiki/codemirror/addon/selection/active-line.js" type="application/javascript">
+<pre>// Because sometimes you need to style the cursor's line.
+//
+// Adds an option 'styleActiveLine' which, when enabled, gives the
+// active line's wrapping &lt;div&gt; the CSS class &quot;CodeMirror-activeline&quot;,
+// and gives its background &lt;div&gt; the class &quot;CodeMirror-activeline-background&quot;.
+
+(function() {
+  &quot;use strict&quot;;
+  var WRAP_CLASS = &quot;CodeMirror-activeline&quot;;
+  var BACK_CLASS = &quot;CodeMirror-activeline-background&quot;;
+
+  CodeMirror.defineOption(&quot;styleActiveLine&quot;, false, function(cm, val, old) {
+    var prev = old &amp;&amp; old != CodeMirror.Init;
+    if (val &amp;&amp; !prev) {
+      updateActiveLine(cm);
+      cm.on(&quot;cursorActivity&quot;, updateActiveLine);
+    } else if (!val &amp;&amp; prev) {
+      cm.off(&quot;cursorActivity&quot;, updateActiveLine);
+      clearActiveLine(cm);
+      delete cm.state.activeLine;
+    }
+  });
+
+  function clearActiveLine(cm) {
+    if (&quot;activeLine&quot; in cm.state) {
+      cm.removeLineClass(cm.state.activeLine, &quot;wrap&quot;, WRAP_CLASS);
+      cm.removeLineClass(cm.state.activeLine, &quot;background&quot;, BACK_CLASS);
+    }
+  }
+
+  function updateActiveLine(cm) {
+    var line = cm.getLineHandleVisualStart(cm.getCursor().line);
+    if (cm.state.activeLine == line) return;
+    clearActiveLine(cm);
+    cm.addLineClass(line, &quot;wrap&quot;, WRAP_CLASS);
+    cm.addLineClass(line, &quot;background&quot;, BACK_CLASS);
+    cm.state.activeLine = line;
+  }
+})();
+</pre>
+</div>
 <div created="20140422183007424" modified="20140422183007424" title="$:/plugins/tiddlywiki/codemirror/instructions">
 <pre>! Configuration
 
@@ -7802,56 +8533,63 @@ For example:
 ```
 </pre>
 </div>
-<div created="20140422223552056" modified="20140423043812917" module-type="library" title="$:/plugins/tiddlywiki/codemirror/keymap/extra.js" type="application/javascript">
+<div created="20140422223552056" modified="20140423221213783" module-type="library" title="$:/plugins/tiddlywiki/codemirror/keymap/extra.js" type="application/javascript">
 <pre>// A number of additional default bindings that are too obscure to
 // include in the core codemirror.js file.
 
 (function() {
-  &quot;use strict&quot;;
+    &quot;use strict&quot;;
+    
+    var Pos = CodeMirror.Pos;
+    
+    function moveLines(cm, start, end, dist) {
+if (!dist || start &gt; end) return 0;
 
-  var Pos = CodeMirror.Pos;
+var from = cm.clipPos(Pos(start, 0)), to = cm.clipPos(Pos(end));
+var text = cm.getRange(from, to);
 
-  function moveLines(cm, start, end, dist) {
-    if (!dist || start &gt; end) return 0;
+if (start &lt;= cm.firstLine())
+cm.replaceRange(&quot;&quot;, from, Pos(to.line + 1, 0));
+else
+cm.replaceRange(&quot;&quot;, Pos(from.line - 1), to);
+var target = from.line + dist;
+if (target &lt;= cm.firstLine()) {
+cm.replaceRange(text + &quot;\n&quot;, Pos(target, 0));
+return cm.firstLine() - from.line;
+} else {
+var targetPos = cm.clipPos(Pos(target - 1));
+cm.replaceRange(&quot;\n&quot; + text, targetPos);
+return targetPos.line + 1 - from.line;
+}
+}
 
-    var from = cm.clipPos(Pos(start, 0)), to = cm.clipPos(Pos(end));
-    var text = cm.getRange(from, to);
-
-    if (start &lt;= cm.firstLine())
-      cm.replaceRange(&quot;&quot;, from, Pos(to.line + 1, 0));
-    else
-      cm.replaceRange(&quot;&quot;, Pos(from.line - 1), to);
-    var target = from.line + dist;
-    if (target &lt;= cm.firstLine()) {
-      cm.replaceRange(text + &quot;\n&quot;, Pos(target, 0));
-      return cm.firstLine() - from.line;
-    } else {
-      var targetPos = cm.clipPos(Pos(target - 1));
-      cm.replaceRange(&quot;\n&quot; + text, targetPos);
-      return targetPos.line + 1 - from.line;
-    }
-  }
-
-  function moveSelectedLines(cm, dist) {
-    var head = cm.getCursor(&quot;head&quot;), anchor = cm.getCursor(&quot;anchor&quot;);
-    cm.operation(function() {
-      var moved = moveLines(cm, Math.min(head.line, anchor.line), Math.max(head.line, anchor.line), dist);
-      cm.setSelection(Pos(anchor.line + moved, anchor.ch), Pos(head.line + moved, head.ch));
+function moveSelectedLines(cm, dist) {
+var head = cm.getCursor(&quot;head&quot;), anchor = cm.getCursor(&quot;anchor&quot;);
+cm.operation(function() {
+    var moved = moveLines(cm, Math.min(head.line, anchor.line), Math.max(head.line, anchor.line), dist);
+    cm.setSelection(Pos(anchor.line + moved, anchor.ch), Pos(head.line + moved, head.ch));
     });
-  }
-
-  CodeMirror.commands.moveLinesUp = function(cm) { moveSelectedLines(cm, -1); };
-  CodeMirror.commands.moveLinesDown = function(cm) { moveSelectedLines(cm, 1); };
-    CodeMirror.commands.createTable = function(cm) { 
-    	var selectedText = cm.getSelection();
-        selectedText = selectedText.replace(/^/gm,&quot;| &quot;).replace(/  +/g,&quot; | &quot;).replace(/$/gm,&quot; |&quot;);
-        cm.replaceSelection(selectedText,&quot;start&quot;);
-    };
-
-  CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-Up&quot;] = &quot;moveLinesUp&quot;;
-  CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-Down&quot;] = &quot;moveLinesDown&quot;;
-  CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-T&quot;] = &quot;createTable&quot;;
-})();</pre>
+    }
+    
+    CodeMirror.commands.moveLinesDown = function(cm) { moveSelectedLines(cm, 1); };
+    CodeMirror.commands.moveLinesUp = function(cm) { moveSelectedLines(cm, -1); };
+            CodeMirror.commands.createTable = function(cm) { 
+                var selectedText = cm.getSelection();
+                selectedText = selectedText.replace(/^/gm,&quot;| &quot;).replace(/  +/g,&quot; | &quot;).replace(/$/gm,&quot; |&quot;);
+                cm.replaceSelection(selectedText,&quot;start&quot;);
+                };
+                
+                
+                CodeMirror.commands.autocomplete = function(cm) {
+                    console.log(&quot;autocomplete&quot;);
+                    CodeMirror.showHint(cm, CodeMirror.hint.anyword);
+                    };
+                    
+                    CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-Up&quot;] = &quot;moveLinesUp&quot;;
+                    CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-Down&quot;] = &quot;moveLinesDown&quot;;
+                    CodeMirror.keyMap[&quot;default&quot;][&quot;Alt-T&quot;] = &quot;createTable&quot;;
+                    CodeMirror.keyMap[&quot;default&quot;][&quot;Ctrl-Space&quot;] = &quot;autocomplete&quot;;
+                    })();</pre>
 </div>
 <div created="20140422214911814" modified="20140422214911814" module-type="library" title="$:/plugins/tiddlywiki/codemirror/keymap/vim.js" type="application/javascript">
 <pre>/**
@@ -13901,7 +14639,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div title="$:/state/modeDropdown-{-274957950}">
 <pre></pre>
 </div>
-<div modified="20140423201501160" title="$:/state/sidebar">
+<div modified="20140423221052821" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div modified="20140423175407683" title="$:/state/tab-{-1021635034}">
@@ -13916,8 +14654,8 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div modified="20140423043230044" title="$:/state/tab-{-1897492566}">
 <pre>$:/core/ui/ControlPanel/Advanced/LoadedModules</pre>
 </div>
-<div modified="20140423200018774" title="$:/state/tab-{-2015462294}">
-<pre>$:/core/ui/AdvancedSearch/Shadows</pre>
+<div modified="20140423213942930" title="$:/state/tab-{-2015462294}">
+<pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
 <div modified="20140422191002569" title="$:/state/tab-{1001106335}">
 <pre>$:/core/ui/TiddlerInfo/Fields</pre>
@@ -13946,11 +14684,11 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div title="$:/state/typeDropdown-{1725582378}">
 <pre></pre>
 </div>
-<div list="$:/plugins/tiddlywiki/codemirror/addon/edit/closetag.js $:/plugins/tiddlywiki/codemirror/mode/htmlmixed.js $:/plugins/tiddlywiki/codemirror/mode/php.js $:/AdvancedSearch $:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js EditOthersButtons codemirrorStyles $:/config/CodeMirror/dynamic $:/core/modules/widgets/edit-text-codemirror.js vbs $:/config/CodeMirror/panel $:/config/CodeMirror/javascript" title="$:/StoryList">
+<div list="$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js $:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js $:/AdvancedSearch $:/plugins/tiddlywiki/codemirror/keymap/extra.js $:/config/CodeMirror/javascript $:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20140422183000785" modified="20140423200016618" title="$:/temp/advancedsearch">
-<pre>codemirror</pre>
+<div created="20140422183000785" modified="20140423215658497" title="$:/temp/advancedsearch">
+<pre>extra.js</pre>
 </div>
 <div created="20140422183133344" modified="20140423185724252" title="$:/temp/NewFieldName">
 <pre></pre>
@@ -13958,7 +14696,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 <div created="20140422191025934" modified="20140422191057568" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
-<div created="20140422223626681" modified="20140422224143367" title="$:/temp/search">
+<div created="20140422223626681" modified="20140423215654388" title="$:/temp/search">
 <pre></pre>
 </div>
 <div dependents="$:/themes/tiddlywiki/vanilla" description="A clean theme that emphasises individual tiddlers" name="Snow White" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.0.10-beta">
@@ -14097,7 +14835,7 @@ if (!CodeMirror.mimeModes.hasOwnProperty(&quot;text/html&quot;))
 &lt;/div&gt;
 &lt;$edit-text tiddler= {{!!editable}} theme={{!!theme}} mode={{!!mode}}/&gt;</pre>
 </div>
-<div created="20140423164406640" editable="New Tiddler 3" mode="vbscript" modified="20140423195848306" theme="default" title="EditOthersButtons">
+<div created="20140423164406640" editable="New Tiddler 3" mode="vbscript" modified="20140423210249954" theme="blackboard" title="EditOthersButtons">
 <pre>&lt;$button popup=&lt;&lt;qualify &quot;$:/state/typeDropdown&quot;&gt;&gt; &gt;theme&lt;/$button&gt;
 &lt;$button popup=&lt;&lt;qualify &quot;$:/state/modeDropdown&quot;&gt;&gt; &gt;mode&lt;/$button&gt;
 &lt;div class=&quot;tw-block-dropdown-wrapper&quot;&gt;
